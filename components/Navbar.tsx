@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Leaf, Menu, X, Camera, Share2, Globe } from 'lucide-react';
+import { Leaf, Menu, X, Camera, Share2, Globe, Sun, Moon } from 'lucide-react';
 import { cn } from '@/app/lib/utils';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,9 +25,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
+    { name: 'Villas', href: '/villas' },
+    { name: 'AI Planner', href: '/ai-planner' },
     { name: 'About', href: '/about' },
     { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Login', href: '/login' },
   ];
 
   return (
@@ -34,7 +36,7 @@ const Navbar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4',
         isScrolled
-          ? 'bg-white/80 backdrop-blur-md shadow-luxury py-3 border-b border-secondary/20'
+          ? 'bg-background/80 dark:bg-black/80 backdrop-blur-md shadow-luxury py-3 border-b border-secondary/20'
           : 'bg-transparent'
       )}
     >
@@ -42,7 +44,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <div className="bg-primary p-1.5 rounded-lg transition-transform group-hover:scale-110 shadow-lg">
-            <Leaf className="w-6 h-6 text-secondary" />
+            <Leaf className="w-6 h-6 text-secondary dark:text-luxury-dark" />
           </div>
           <span className={cn(
             "text-2xl font-serif font-bold tracking-tight transition-colors",
@@ -67,6 +69,7 @@ const Navbar = () => {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all group-hover:w-full" />
             </Link>
           ))}
+          <ThemeToggle />
           <Link
             href="/login"
             className={cn(

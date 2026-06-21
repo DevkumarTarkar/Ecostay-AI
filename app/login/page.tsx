@@ -1,110 +1,146 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Leaf, Mail, Lock, ArrowRight, Shield } from 'lucide-react';
+import React, { useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button, Input } from '@/components/ui';
+import { Leaf, Mail, Lock, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-const LoginPage = () => {
+export default function LoginPage() {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
-    <main className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Background Image with Ken Burns Effect */}
-      <motion.div 
-        initial={{ scale: 1 }}
-        animate={{ scale: 1.1 }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop")' }}
-      />
+    <main className="min-h-screen bg-background dark:bg-black transition-colors duration-500 pt-24 text-foreground flex flex-col">
+      <Navbar />
       
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
-
-      {/* Glassmorphism Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 w-full max-w-md p-8 md:p-12 mx-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-[3rem] shadow-2xl overflow-hidden"
-      >
-        {/* Subtle inner bloom */}
-        <div className="absolute -top-24 -right-24 w-48 h-48 bg-secondary/10 rounded-full blur-3xl" />
+      <div className="flex-1 flex items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-fixed">
+        <div className="absolute inset-0 bg-primary/20 dark:bg-black/80 backdrop-blur-sm" />
         
-        <div className="relative z-10 text-center mb-10">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6 group">
-            <div className="bg-secondary p-2 rounded-xl group-hover:scale-110 transition-transform">
-              <Leaf className="w-6 h-6 text-primary" />
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative w-full max-w-md bg-white dark:bg-luxury-dark rounded-[3rem] p-10 shadow-2xl border border-secondary/20 overflow-hidden"
+        >
+          {/* Decorative Gradient */}
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+
+          {/* Logo Section */}
+          <div className="text-center mb-10">
+            <div className="bg-primary w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <Leaf className="w-8 h-8 text-secondary" />
             </div>
-            <span className="text-2xl font-serif font-bold text-white tracking-tight">EcoStay AI</span>
-          </Link>
-          <h1 className="text-3xl font-serif font-bold text-white mb-2 italic">Welcome Back</h1>
-          <p className="text-white/60 text-sm">Experience luxury without compromise.</p>
-        </div>
+            <h2 className="text-3xl font-serif font-bold text-primary dark:text-secondary italic">
+              {isLogin ? 'Welcome Back' : 'Join the Collective'}
+            </h2>
+            <p className="text-muted dark:text-foreground/60 text-sm mt-2 font-medium">
+              {isLogin ? 'Sign in to access your luxury sanctuaries.' : 'Start your journey towards sustainable luxury.'}
+            </p>
+          </div>
 
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-secondary ml-1">Email Address</label>
-            <div className="relative group">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-secondary transition-colors" />
-              <input 
-                type="email" 
-                placeholder="aryan@example.com"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-secondary transition-all"
-              />
+          <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+            <AnimatePresence mode="wait">
+              {!isLogin && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
+                  <label className="text-xs font-bold uppercase tracking-widest text-primary/50 dark:text-secondary/50 mb-2 block">Full Name</label>
+                  <div className="relative group">
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary transition-colors group-focus-within:text-primary" />
+                    <Input 
+                      placeholder="Alexander Luxury" 
+                      className="pl-12 h-14 bg-primary/5 dark:bg-white/5 border-secondary/10 focus:border-secondary" 
+                    />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <div>
+              <label className="text-xs font-bold uppercase tracking-widest text-primary/50 dark:text-secondary/50 mb-2 block">Email Address</label>
+              <div className="relative group">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary transition-colors group-focus-within:text-primary" />
+                <Input 
+                  type="email"
+                  placeholder="name@ecostay.ai" 
+                  className="pl-12 h-14 bg-primary/5 dark:bg-white/5 border-secondary/10 focus:border-secondary" 
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs font-bold uppercase tracking-widest text-primary/50 dark:text-secondary/50 mb-2 block">Password</label>
+              <div className="relative group">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary transition-colors group-focus-within:text-primary" />
+                <Input 
+                  type="password"
+                  placeholder="••••••••" 
+                  className="pl-12 h-14 bg-primary/5 dark:bg-white/5 border-secondary/10 focus:border-secondary" 
+                />
+              </div>
+              {isLogin && (
+                <div className="text-right mt-2">
+                  <button className="text-xs font-bold text-secondary hover:underline transition-colors uppercase tracking-widest">Forgot Password?</button>
+                </div>
+              )}
+            </div>
+
+            <Button 
+              className="w-full h-14 rounded-full bg-primary text-secondary hover:bg-primary/90 shadow-xl group"
+            >
+              <span className="flex items-center justify-center gap-2">
+                {isLogin ? 'Sign In' : 'Create Account'}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Button>
+          </form>
+
+          {/* Social Auth */}
+          <div className="mt-8">
+            <div className="relative flex items-center justify-center mb-6">
+              <div className="border-t border-secondary/20 w-full" />
+              <span className="bg-white dark:bg-luxury-dark px-4 py-1 text-[10px] font-bold text-primary/40 dark:text-foreground/40 absolute uppercase tracking-widest">Or Continue With</span>
+            </div>
+            
+            <div className="flex gap-4">
+              <button className="flex-1 h-12 rounded-2xl border border-secondary/10 flex items-center justify-center gap-2 hover:bg-primary/5 dark:hover:bg-white/5 transition-all">
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path fill="#EA4335" d="M12 5.04c1.94 0 3.73.67 5.11 1.99l3.83-3.83C18.48 1.15 15.42 0 12 0 7.31 0 3.25 2.69 1.18 6.6l4.47 3.47C6.69 7.02 9.1 5.04 12 5.04z" />
+                  <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.47 4.47c2.03-1.87 3.22-4.62 3.22-8.02z" />
+                  <path fill="#FBBC05" d="M5.65 14.13c-.26-.79-.41-1.63-.41-2.5 0-.87.15-1.71.41-2.5L1.18 5.67C.43 7.59 0 9.75 0 12s.43 4.41 1.18 6.33l4.47-3.47z" />
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.07 7.94-2.91l-3.47-4.47c-1.11.75-2.54 1.2-4.47 1.2-3.87 0-7.13-2.61-8.31-6.13l-4.47 3.47C3.25 21.31 7.31 24 12 24z" />
+                </svg>
+                <span className="text-xs font-bold text-primary dark:text-foreground">Google</span>
+              </button>
+              <button className="flex-1 h-12 rounded-2xl border border-secondary/10 flex items-center justify-center gap-2 hover:bg-primary/5 dark:hover:bg-white/5 transition-all">
+                <svg className="w-5 h-5 text-primary dark:text-foreground" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span className="text-xs font-bold text-primary dark:text-foreground">GitHub</span>
+              </button>
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-widest text-secondary ml-1">Password</label>
-            <div className="relative group">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-secondary transition-colors" />
-              <input 
-                type="password" 
-                placeholder="••••••••"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-secondary transition-all"
-              />
-            </div>
+          {/* Toggle Switch */}
+          <div className="mt-10 text-center">
+            <p className="text-sm text-muted dark:text-foreground/50 font-medium font-sans">
+              {isLogin ? "Don't have a retreat account?" : "Already part of the collective?"}
+              <button 
+                onClick={() => setIsLogin(!isLogin)}
+                className="ml-2 text-secondary font-bold hover:underline transition-all"
+              >
+                {isLogin ? 'Sign Up' : 'Sign In'}
+              </button>
+            </p>
           </div>
+        </motion.div>
+      </div>
 
-          <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center gap-2 text-white/60 cursor-pointer group">
-              <input type="checkbox" className="w-4 h-4 rounded border-white/10 bg-white/5 accent-secondary" />
-              <span className="group-hover:text-white transition-colors">Remember me</span>
-            </label>
-            <a href="#" className="text-secondary hover:underline font-medium">Forgot password?</a>
-          </div>
-
-          <button className="w-full py-4 bg-secondary text-primary rounded-full font-bold text-lg flex items-center justify-center gap-2 transition-all hover:bg-white hover:scale-[1.02] shadow-xl mt-8">
-            Login
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </form>
-
-        <div className="mt-10 pt-8 border-t border-white/10 text-center">
-          <p className="text-white/40 text-sm mb-6">Or continue with</p>
-          <div className="flex gap-4">
-            <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-white/10 transition-all">
-              <Shield className="w-5 h-5" />
-              GitHub
-            </button>
-            <button className="flex-1 flex items-center justify-center gap-2 py-3 bg-white/5 border border-white/10 rounded-2xl text-white hover:bg-white/10 transition-all">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.908 3.152-1.928 4.176-1.288 1.288-3.136 2.536-7.112 2.536-6.424 0-11.392-5.176-11.392-11.6s4.968-11.6 11.392-11.6c3.48 0 6.008 1.376 7.848 3.12l2.312-2.312c-2.112-2.024-5.112-3.528-10.16-3.528-8.848 0-16 7.152-16 16s7.152 16 16 16c4.896 0 8.608-1.616 11.536-4.64 3.016-3.04 3.968-7.232 3.968-10.592 0-.912-.08-1.808-.232-2.656h-15.272z" />
-              </svg>
-              Google
-            </button>
-          </div>
-          <p className="mt-10 text-white/50 text-sm">
-            Don't have an account? <Link href="/login" className="text-secondary font-bold hover:underline">Sign up</Link>
-          </p>
-        </div>
-      </motion.div>
-      
-      {/* Decorative dots */}
-      <div className="absolute top-20 left-20 w-32 h-32 border border-white/10 rounded-full" />
-      <div className="absolute bottom-40 right-20 w-64 h-64 border border-white/10 rounded-full" />
+      <Footer />
     </main>
   );
-};
-
-export default LoginPage;
+}

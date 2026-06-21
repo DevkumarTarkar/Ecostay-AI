@@ -8,15 +8,15 @@ import { Calendar, Heart, Star, Sparkles, MapPin, Clock, LogOut } from 'lucide-r
 
 const Dashboard = () => {
   return (
-    <main className="min-h-screen bg-[#FDFCF9] pt-24">
+    <main className="min-h-screen bg-background dark:bg-black transition-colors duration-500 pt-24">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary italic leading-tight">Welcome back, <span className="text-secondary underline decoration-primary/20">Aryan</span></h1>
-            <p className="text-muted mt-2 font-medium">Manage your luxury retreats and discover AI-curated escapes.</p>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary dark:text-secondary italic leading-tight">Welcome back, <span className="text-secondary dark:text-white underline decoration-primary/20">Aryan</span></h1>
+            <p className="text-muted dark:text-foreground/80 mt-2 font-medium">Manage your luxury retreats and discover AI-curated escapes.</p>
           </div>
           <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-red-500/20 text-red-600 hover:bg-red-50 transition-all font-bold">
             <LogOut className="w-5 h-5" />
@@ -31,11 +31,11 @@ const Dashboard = () => {
           <div className="lg:col-span-2 space-y-8">
             
             {/* My Bookings */}
-            <div className="bg-white rounded-[2rem] p-8 shadow-luxury border border-secondary/20">
+            <div className="bg-white dark:bg-luxury-dark rounded-[2rem] p-8 shadow-luxury border border-secondary/20">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-serif font-bold text-primary flex items-center gap-3">
+                <h2 className="text-2xl font-serif font-bold text-primary dark:text-foreground flex items-center gap-3">
                   <Calendar className="text-secondary w-6 h-6" />
-                  My Bookings
+                  My Upcoming Retreats
                 </h2>
                 <button className="text-primary font-bold text-sm hover:text-secondary transition-colors underline">View History</button>
               </div>
@@ -50,16 +50,16 @@ const Dashboard = () => {
                     <div className="flex-1">
                       <div className="flex items-start justify-between">
                         <div>
-                          <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors">{booking.name}</h3>
-                          <div className="flex items-center gap-1 text-sm text-muted mt-1 font-medium">
+                          <h3 className="text-lg font-bold text-primary dark:text-foreground group-hover:text-secondary transition-colors">{booking.name}</h3>
+                          <div className="flex items-center gap-1 text-sm text-muted dark:text-foreground/60 mt-1 font-medium">
                             <MapPin className="w-3.5 h-3.5" /> {booking.location}
                           </div>
                         </div>
-                        <span className={`text-[11px] uppercase tracking-widest font-bold px-4 py-1.5 rounded-full ${booking.status === 'Upcoming' ? 'bg-primary text-secondary' : 'bg-gray-200 text-gray-700'}`}>
+                        <span className={`text-[11px] uppercase tracking-widest font-bold px-4 py-1.5 rounded-full ${booking.status === 'Upcoming' ? 'bg-primary text-secondary' : 'bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-foreground/70'}`}>
                           {booking.status}
                         </span>
                       </div>
-                      <div className="flex items-center gap-3 mt-4 text-sm font-bold text-primary">
+                      <div className="flex items-center gap-3 mt-4 text-sm font-bold text-primary dark:text-foreground/80">
                         <Clock className="w-4 h-4 text-secondary" />
                         {booking.date}
                       </div>
@@ -70,11 +70,11 @@ const Dashboard = () => {
             </div>
 
             {/* Saved Properties */}
-            <div className="bg-white rounded-3xl p-8 shadow-luxury border border-secondary/10">
+            <div className="bg-white dark:bg-black/40 rounded-3xl p-8 shadow-luxury border border-secondary/10 dark:border-secondary/20 transition-colors">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-serif font-bold text-primary flex items-center gap-3">
+                <h2 className="text-2xl font-serif font-bold text-primary dark:text-secondary flex items-center gap-3">
                   <Heart className="text-secondary w-6 h-6" />
-                  Saved Properties
+                  Saved Sanctuaries
                 </h2>
                 <button className="text-secondary font-bold text-sm hover:underline">See All</button>
               </div>
@@ -132,19 +132,20 @@ const Dashboard = () => {
                </div>
             </div>
 
-            <div className="bg-white rounded-3xl p-8 shadow-luxury border border-secondary/10">
-              <h3 className="font-serif font-bold text-xl text-primary mb-4">Travel Pulse</h3>
+            <div className="bg-white dark:bg-luxury-dark rounded-3xl p-8 shadow-luxury border border-secondary/10">
+              <h3 className="font-serif font-bold text-xl text-primary dark:text-foreground mb-4">Travel Pulse</h3>
               <div className="space-y-4">
                  {[
-                   { label: "Total Spent", value: "₹45,500" },
-                   { label: "Trips Completed", value: "4" },
-                   { label: "Carbon Offset", value: "1.2 Tons" }
-                 ].map((stat, idx) => (
-                   <div key={idx} className="flex justify-between items-center py-3 border-b border-secondary/5 last:border-0">
-                      <span className="text-muted text-sm">{stat.label}</span>
-                      <span className="font-bold text-primary">{stat.value}</span>
-                   </div>
-                 ))}
+                  { label: "Bookings", value: "12", icon: Calendar },
+                  { label: "AI Plans", value: "4", icon: MapPin },
+                  { label: "Rewards", value: "2.4k", icon: Star },
+                ].map((stat, i) => (
+                  <div key={i} className="flex flex-col items-center p-4 bg-primary/5 dark:bg-white/5 rounded-2xl">
+                    <stat.icon className="w-5 h-5 text-secondary mb-2" />
+                    <span className="text-xl font-bold text-primary dark:text-white">{stat.value}</span>
+                    <span className="text-[10px] uppercase font-bold text-primary/40 dark:text-secondary/60">{stat.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
