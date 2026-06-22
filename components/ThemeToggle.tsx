@@ -31,9 +31,9 @@ export function ThemeToggle() {
       title="Toggle theme"
     >
       {theme === 'dark' ? (
-        <Sun className="h-5 w-5 text-secondary animate-in fade-in zoom-in duration-300" />
+        <Sun className="h-5 w-5 text-yellow-400 animate-in fade-in zoom-in duration-300" />
       ) : (
-        <Moon className="h-5 w-5 text-primary animate-in fade-in zoom-in duration-300" />
+        <Moon className="h-5 w-5 text-white animate-in fade-in zoom-in duration-300" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

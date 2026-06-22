@@ -66,10 +66,10 @@ export default function VillasPage() {
       
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-primary dark:text-secondary">
-            {filteredProperties.length} <span className="text-secondary dark:text-white italic">Exquisite Sanctuaries</span> Found
+          <h2 className="text-3xl md:text-5xl font-sans font-extrabold text-black dark:text-white">
+            !!! {filteredProperties.length} <span className="text-yellow-600 dark:text-yellow-400 italic">Exquisite Sanctuaries</span> Found !!!
           </h2>
-          <p className="text-muted dark:text-foreground/70 text-lg max-w-2xl font-medium">
+          <p className="text-lg max-w-2xl font-semibold text-black/70 dark:text-foreground/70">
             Explore curated sustainable escapes that redefine Indian luxury hospitality.
           </p>
         </div>
@@ -87,9 +87,9 @@ export default function VillasPage() {
               />
             </div>
           </div>
-          <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg active:scale-95">
-            <SlidersHorizontal className="w-5 h-5 text-secondary" />
-            Filters
+          <button className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-black text-white font-extrabold hover:bg-black/90 transition-all shadow-lg active:scale-95">
+            <SlidersHorizontal className="w-5 h-5 text-yellow-400" />
+            FILTER NOW
           </button>
         </div>
 

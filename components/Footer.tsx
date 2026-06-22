@@ -4,19 +4,19 @@ import { Leaf, Camera, Share2, Globe, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-luxury-dark text-white pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-16">
+    <footer className="bg-slate-50 dark:bg-black pt-20 pb-10 border-t border-secondary/10 transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-secondary/10 dark:border-white/10 pb-16">
         {/* Brand Section */}
         <div className="space-y-6">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-primary p-2 rounded-xl transition-transform group-hover:scale-110">
-              <Leaf className="w-6 h-6 text-secondary" />
+            <div className="bg-primary p-2 rounded-xl transition-transform group-hover:scale-110 shadow-md">
+              <Leaf className="w-6 h-6 text-yellow-400" />
             </div>
-            <span className="text-2xl font-serif font-bold text-white tracking-tight">
+            <span className="text-2xl font-serif font-bold text-primary dark:text-white tracking-tight">
               EcoStay <span className="text-secondary">AI</span>
             </span>
           </Link>
-          <p className="text-white/60 leading-relaxed max-w-xs">
+          <p className="text-slate-600 dark:text-white/60 leading-relaxed max-w-xs font-medium">
             Redefining luxury travel through sustainable architecture and AI-driven personalized experiences across the heart of India.
           </p>
           <div className="flex items-center gap-4">
@@ -24,9 +24,9 @@ const Footer = () => {
               <a 
                 key={i} 
                 href="#" 
-                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center transition-all hover:bg-secondary hover:text-primary"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transition-all hover:bg-yellow-400 hover:text-primary group"
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-5 h-5 text-white group-hover:text-primary" />
               </a>
             ))}
           </div>
@@ -38,7 +38,7 @@ const Footer = () => {
           <ul className="space-y-4">
             {['Home', 'About Us', 'Our Villas', 'Sustainable Vision', 'Contact'].map((link) => (
               <li key={link}>
-                <Link href="#" className="text-white/60 hover:text-white transition-colors">{link}</Link>
+                <Link href="#" className="text-slate-600 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium">{link}</Link>
               </li>
             ))}
           </ul>
@@ -50,7 +50,7 @@ const Footer = () => {
           <ul className="space-y-4">
             {['Goa Luxury Collections', 'Manali Hill Retreats', 'Udaipur Heritage Stays', 'Coorg Coffee Estates', 'Rishikesh Yoga Centers'].map((link) => (
               <li key={link}>
-                <Link href="#" className="text-white/60 hover:text-white transition-colors">{link}</Link>
+                <Link href="#" className="text-slate-600 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium">{link}</Link>
               </li>
             ))}
           </ul>
@@ -62,26 +62,26 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-secondary shrink-0 mt-1" />
-              <p className="text-white/60">123 Krishna Vihaar, Mathura, Uttar Pradesh, India</p>
+              <p className="text-slate-700 dark:text-white/60 font-medium">123 Krishna Vihaar, Mathura, Uttar Pradesh, India</p>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-secondary shrink-0" />
-              <p className="text-white/60">+91 98765 43210</p>
+              <p className="text-slate-700 dark:text-white/60 font-medium">+91 98765 43210</p>
             </div>
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-secondary shrink-0" />
-              <p className="text-white/60">contact@ecostay.ai</p>
+              <p className="text-slate-700 dark:text-white/60 font-medium">contact@ecostay.ai</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Copyright */}
-      <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-sm">
+      <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 dark:text-white/40 text-sm">
         <p>© 2024 EcoStay AI. All rights reserved.</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-white">Privacy Policy</a>
-          <a href="#" className="hover:text-white">Terms of Service</a>
+          <a href="#" className="hover:text-primary dark:hover:text-white">Privacy Policy</a>
+          <a href="#" className="hover:text-primary dark:hover:text-white">Terms of Service</a>
         </div>
       </div>
     </footer>

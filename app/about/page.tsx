@@ -8,7 +8,7 @@ import { Target, Eye, Leaf, Users } from 'lucide-react';
 
 const AboutPage = () => {
   return (
-    <main className="min-h-screen bg-background dark:bg-black transition-colors duration-500 pt-24 text-foreground">
+    <main className="min-h-screen bg-background transition-colors duration-500 pt-24 text-foreground">
       <Navbar />
       
       {/* Hero Section */}
@@ -45,18 +45,18 @@ const AboutPage = () => {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <Target className="text-secondary w-8 h-8" />
-                <h2 className="text-3xl font-serif font-bold text-primary dark:text-secondary">Our Mission</h2>
+                <h2 className="text-3xl font-serif font-bold text-black dark:text-secondary">Our Mission</h2>
               </div>
-              <p className="text-foreground/80 dark:text-white/80 leading-relaxed text-lg font-medium">
+              <p className="text-black dark:text-white/80 leading-relaxed text-lg font-medium">
                 To provide travelers with unparalleled luxury experiences that are deeply rooted in sustainability. We believe that true luxury shouldn't cost the Earth. By curating the finest eco-stays, we aim to transform how India travels.
               </p>
             </div>
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <Eye className="text-secondary w-8 h-8" />
-                <h2 className="text-3xl font-serif font-bold text-primary dark:text-secondary">Sustainable Vision</h2>
+                <h2 className="text-3xl font-serif font-bold text-black dark:text-secondary">Sustainable Vision</h2>
               </div>
-              <p className="text-foreground/80 dark:text-white/80 leading-relaxed text-lg font-medium">
+              <p className="text-black dark:text-white/80 leading-relaxed text-lg font-medium">
                 Our vision is to build a network of 1000+ carbon-neutral villas across India by 2030, powered by AI that optimizes energy consumption and minimizes waste while maximizing guest comfort.
               </p>
             </div>
@@ -77,9 +77,9 @@ const AboutPage = () => {
       </section>
 
       {/* Why Travelers Choose Us */}
-      <section className="py-24 bg-background dark:bg-black/50 border-y border-secondary/10">
+      <section className="py-24 bg-white/50 dark:bg-card text-black dark:text-card-foreground border-y border-secondary/10 dark:border-white/5">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-serif font-bold text-primary dark:text-secondary text-center mb-16 italic">Why Travelers Choose Us</h2>
+          <h2 className="text-4xl font-serif font-bold text-black dark:text-white text-center mb-16 italic">Why Travelers Choose Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { icon: Leaf, title: "Zero Impact", desc: "Our villas use renewable energy and water recycling systems to ensure a minimal carbon footprint." },
@@ -87,11 +87,11 @@ const AboutPage = () => {
               { icon: Users, title: "AI-Curated Comfort", desc: "From room temperature to local hidden gems, our AI personalizes every aspect of your stay." }
             ].map((feature, idx) => (
               <div key={idx} className="text-center space-y-4">
-                <div className="w-20 h-20 bg-primary/5 dark:bg-secondary/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6 group hover:bg-secondary transition-colors duration-500">
-                  <feature.icon className="w-10 h-10 text-primary dark:text-secondary transition-colors group-hover:text-white" />
+                <div className="w-20 h-20 bg-primary/5 dark:bg-yellow-400/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6 group hover:bg-secondary dark:hover:bg-yellow-400 transition-colors duration-500">
+                  <feature.icon className="w-10 h-10 text-primary dark:text-yellow-400 transition-colors group-hover:text-white dark:group-hover:text-primary" />
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-primary dark:text-white">{feature.title}</h3>
-                <p className="text-foreground/60 dark:text-white/60 leading-relaxed">{feature.desc}</p>
+                <h3 className="text-2xl font-serif font-bold text-black dark:text-white">{feature.title}</h3>
+                <p className="text-black dark:text-white/60 leading-relaxed font-medium">{feature.desc}</p>
               </div>
             ))}
           </div>

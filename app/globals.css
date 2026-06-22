@@ -2,21 +2,24 @@
 
 @layer base {
   :root {
-    --background: #F8FAFC;
+    --background: #E0F2FE; /* Sky Blue background for Light Mode */
     --foreground: #0F172A;
     --primary: #1E293B;
     --secondary: #94A3B8;
-    --accent: #38BDF8;
+    --accent: #FACC15; /* Yellow for branding items */
     --muted: #64748B;
-    --luxury-dark: #0F172A;
+    --card: #FFFFFF;
+    --card-foreground: #0F172A;
     color-scheme: light;
   }
 
   .dark {
     --background: #020617;
     --foreground: #F8FAFC;
-    --primary: #38BDF8; /* Electric Blue as primary for dark mode highlights */
+    --primary: #38BDF8;
     --secondary: #94A3B8;
+    --card: #0F172A;
+    --card-foreground: #FFFFFF;
     color-scheme: dark;
   }
 }
@@ -63,3 +66,5 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+

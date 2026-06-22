@@ -72,8 +72,8 @@ const Home = () => {
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 italic">Featured Properties</h2>
-            <p className="text-muted text-lg leading-relaxed font-medium">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-black dark:text-white mb-4 italic">Featured Properties</h2>
+            <p className="text-black/70 dark:text-muted text-lg leading-relaxed font-medium">
               Explore our handpicked selection of the finest luxury villas and eco-friendly stays across the most breathtaking landscapes of India.
             </p>
           </div>
@@ -90,10 +90,10 @@ const Home = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-24 bg-primary text-white border-y border-white/10">
+      <section className="py-24 bg-card text-card-foreground border-y border-secondary/10 dark:border-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 drop-shadow-lg">Why Choose <span className="text-secondary">EcoStay AI</span></h2>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto font-medium">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-black dark:text-white">Why Choose <span className="text-yellow-600 dark:text-yellow-400">EcoStay AI</span></h2>
+          <p className="text-black/60 dark:text-white/60 text-lg max-w-2xl mx-auto font-medium">
             Experience the future of travel where luxury meets sustainability, powered by AI to ensure your stay is as unique as you are.
           </p>
         </div>
@@ -108,13 +108,13 @@ const Home = () => {
             <motion.div 
               key={idx}
               whileHover={{ y: -10 }}
-              className="p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 text-center"
+              className="p-8 bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-3xl border border-secondary/10 dark:border-white/10 text-center shadow-sm"
             >
-              <div className="w-16 h-16 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <item.icon className="w-8 h-8 text-secondary" />
+              <div className="w-16 h-16 bg-yellow-600/10 dark:bg-yellow-400/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <item.icon className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
               </div>
-              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-xl font-bold mb-3 text-black dark:text-white">{item.title}</h3>
+              <p className="text-black/50 dark:text-white/50 text-sm leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -123,8 +123,8 @@ const Home = () => {
       {/* Popular Destinations Section */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4 italic">Popular Destinations</h2>
-          <p className="text-muted text-lg max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-black dark:text-white mb-4 italic">Popular Destinations</h2>
+          <p className="text-black/70 dark:text-muted text-lg max-w-2xl mx-auto font-medium">
             From the serene mountains of Manali to the sun-kissed beaches of Goa, discover your next favorite escape.
           </p>
         </div>

@@ -49,8 +49,8 @@ export default function AIPlannerPage() {
           
           <div className="p-8 border-b border-secondary/10 flex items-center justify-between relative z-10">
             <div className="flex items-center gap-4">
-               <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shadow-lg">
-                  <Sparkles className="w-6 h-6 text-secondary" />
+               <div className="w-12 h-12 rounded-2xl !bg-slate-300 dark:bg-white/70 flex items-center justify-center shadow-lg">
+                  <Sparkles className="w-6 h-6 text-black" />
                </div>
                <div>
                   <h2 className="text-2xl font-serif font-bold text-primary dark:text-foreground">AI Concierge</h2>
@@ -59,8 +59,8 @@ export default function AIPlannerPage() {
             </div>
             <div className="hidden md:flex gap-4">
                {[Compass, Hotel, Leaf].map((Icon, idx) => (
-                 <div key={idx} className="w-10 h-10 rounded-xl bg-white/50 flex items-center justify-center border border-secondary/10 shadow-sm">
-                   <Icon className="w-5 h-5 text-primary/40" />
+                 <div key={idx} className="w-10 h-10 rounded-xl !bg-slate-300 dark:bg-white/70 flex items-center justify-center border border-secondary/10 shadow-sm transition-transform hover:scale-110">
+                   <Icon className="w-5 h-5 text-black" />
                  </div>
                ))}
             </div>
@@ -102,7 +102,7 @@ export default function AIPlannerPage() {
             <div className="relative group">
               <Input 
                 placeholder="Type your preferences..." 
-                className="pr-16 h-16 rounded-[2rem] bg-white/80 dark:bg-luxury-dark/80 border-secondary/20 shadow-inner group-focus-within:border-secondary transition-all"
+                className="pr-16 h-16 rounded-[2rem] bg-white/10 dark:bg-black/20 border-white/20 dark:border-white/10 text-white placeholder:text-white/40 focus:ring-secondary/50 shadow-inner group-focus-within:border-secondary transition-all"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
@@ -110,10 +110,10 @@ export default function AIPlannerPage() {
               <Button 
                 variant="primary" 
                 size="sm" 
-                className="absolute right-2 top-2 h-12 w-12 p-0 rounded-full shadow-xl"
+                className="absolute right-2 top-2 h-12 w-12 p-0 rounded-full shadow-xl bg-yellow-400 hover:bg-yellow-500"
                 onClick={handleSend}
               >
-                <Send className="w-5 h-5 text-secondary" />
+                <Send className="w-5 h-5 text-black" />
               </Button>
             </div>
           </div>
@@ -121,9 +121,9 @@ export default function AIPlannerPage() {
 
         {/* AI Analysis Sidebar */}
         <div className="hidden lg:flex flex-col gap-8">
-           <div className="bg-primary text-white rounded-[3rem] p-8 shadow-2xl relative overflow-hidden flex-1 border border-white/10">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full blur-3xl" />
-              <h3 className="text-2xl font-serif font-bold mb-8 italic">AI Real-time <br /><span className="text-secondary">Analysis</span></h3>
+           <div className="bg-white dark:bg-yellow-400 text-primary dark:text-black rounded-[3rem] p-8 shadow-2xl relative overflow-hidden flex-1 border border-secondary/20 dark:border-black/5">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 dark:bg-black/5 rounded-full blur-3xl" />
+              <h3 className="text-2xl font-serif font-bold mb-8 italic text-primary dark:text-black">AI Real-time <br /><span className="text-secondary dark:text-black">Analysis</span></h3>
               
               <div className="space-y-6">
                  {SAMPLE_PICKS.map((pick, i) => (
@@ -132,24 +132,24 @@ export default function AIPlannerPage() {
                      initial={{ opacity: 0, x: 20 }}
                      animate={{ opacity: 1, x: 0 }}
                      transition={{ delay: i * 0.2 }}
-                     className="p-5 bg-white/10 rounded-2xl border border-white/10 group cursor-pointer hover:bg-white/15"
+                     className="p-5 bg-primary/5 dark:bg-black/5 rounded-2xl border border-secondary/10 dark:border-black/10 group cursor-pointer hover:bg-secondary/10 dark:hover:bg-black/10"
                    >
                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="font-bold text-secondary">{pick.name}</h4>
-                        <span className="text-[10px] bg-secondary/20 text-secondary px-2 py-0.5 rounded-full font-bold">{pick.match}</span>
+                        <h4 className="font-bold text-primary dark:text-black">{pick.name}</h4>
+                        <span className="text-[10px] bg-secondary/20 dark:bg-black/10 text-secondary dark:text-black px-2 py-0.5 rounded-full font-bold">{pick.match}</span>
                      </div>
-                     <p className="text-xs text-white/60 mb-2 italic">{pick.location}</p>
-                     <p className="text-[10px] text-emerald-400 font-bold uppercase tracking-tighter flex items-center gap-1">
+                     <p className="text-xs text-muted dark:text-black/60 mb-2 italic">{pick.location}</p>
+                     <p className="text-[10px] text-emerald-600 dark:text-emerald-700 font-bold uppercase tracking-tighter flex items-center gap-1">
                         <Leaf className="w-2.5 h-2.5" />
                         {pick.reason}
                      </p>
                    </motion.div>
                  ))}
               </div>
-
+ 
               <div className="mt-auto pt-8">
-                 <div className="p-4 bg-secondary/10 rounded-2xl border border-secondary/20">
-                    <p className="text-xs text-white/50 leading-relaxed italic">
+                 <div className="p-4 bg-secondary/10 dark:bg-black/5 rounded-2xl border border-secondary/20 dark:border-black/10">
+                    <p className="text-xs text-muted dark:text-black/50 leading-relaxed italic">
                       "Analyzing the nexus of your travel history and current market sustainability trends to find your perfect sanctuary."
                     </p>
                  </div>

@@ -8,15 +8,15 @@ import { Calendar, Heart, Star, Sparkles, MapPin, Clock, LogOut } from 'lucide-r
 
 const Dashboard = () => {
   return (
-    <main className="min-h-screen bg-background dark:bg-black transition-colors duration-500 pt-24">
+    <main className="min-h-screen bg-background transition-colors duration-500 pt-24 text-foreground">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary dark:text-secondary italic leading-tight">Welcome back, <span className="text-secondary dark:text-white underline decoration-primary/20">Aryan</span></h1>
-            <p className="text-muted dark:text-foreground/80 mt-2 font-medium">Manage your luxury retreats and discover AI-curated escapes.</p>
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary italic leading-tight">Welcome back, <span className="text-yellow-400 underline decoration-primary/20">Aryan</span></h1>
+            <p className="text-primary/70 mt-2 font-medium">Manage your luxury retreats and discover AI-curated escapes.</p>
           </div>
           <button className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-red-500/20 text-red-600 hover:bg-red-50 transition-all font-bold">
             <LogOut className="w-5 h-5" />
@@ -31,7 +31,7 @@ const Dashboard = () => {
           <div className="lg:col-span-2 space-y-8">
             
             {/* My Bookings */}
-            <div className="bg-white dark:bg-luxury-dark rounded-[2rem] p-8 shadow-luxury border border-secondary/20">
+            <div className="bg-card text-card-foreground rounded-[2rem] p-8 shadow-luxury border border-white/5">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-serif font-bold text-primary dark:text-foreground flex items-center gap-3">
                   <Calendar className="text-secondary w-6 h-6" />
@@ -51,7 +51,7 @@ const Dashboard = () => {
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="text-lg font-bold text-primary dark:text-foreground group-hover:text-secondary transition-colors">{booking.name}</h3>
-                          <div className="flex items-center gap-1 text-sm text-muted dark:text-foreground/60 mt-1 font-medium">
+                          <div className="flex items-center gap-1 text-sm text-primary/80 mt-1 font-medium">
                             <MapPin className="w-3.5 h-3.5" /> {booking.location}
                           </div>
                         </div>
@@ -70,13 +70,13 @@ const Dashboard = () => {
             </div>
 
             {/* Saved Properties */}
-            <div className="bg-white dark:bg-black/40 rounded-3xl p-8 shadow-luxury border border-secondary/10 dark:border-secondary/20 transition-colors">
+            <div className="bg-card text-card-foreground rounded-3xl p-8 shadow-luxury border border-white/5 transition-colors">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-serif font-bold text-primary dark:text-secondary flex items-center gap-3">
+                <h2 className="text-2xl font-serif font-bold text-primary flex items-center gap-3">
                   <Heart className="text-secondary w-6 h-6" />
                   Saved Sanctuaries
                 </h2>
-                <button className="text-secondary font-bold text-sm hover:underline">See All</button>
+                <button className="text-primary font-bold text-sm hover:underline">See All</button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
@@ -101,16 +101,15 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Right Column - AI Recommendations */}
           <div className="space-y-8">
-            <div className="bg-primary text-white rounded-[3rem] p-8 shadow-2xl relative overflow-hidden border border-white/10">
-               <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl opacity-50" />
+            <div className="bg-white dark:bg-yellow-400 text-primary dark:text-black rounded-[3rem] p-8 shadow-2xl relative overflow-hidden border border-secondary/20 dark:border-black/5">
+               <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary/20 dark:bg-black/5 rounded-full blur-3xl opacity-50" />
                <div className="relative z-10">
                  <div className="flex items-center gap-3 mb-6">
-                    <Sparkles className="text-secondary w-8 h-8 drop-shadow-[0_0_10px_rgba(226,194,117,0.5)]" />
-                    <h2 className="text-2xl font-serif font-bold text-white leading-tight">AI Picks <br /><span className="text-secondary italic">For You</span></h2>
+                    <Sparkles className="text-secondary dark:text-black w-8 h-8 drop-shadow-[0_0_10px_rgba(226,194,117,0.5)]" />
+                    <h2 className="text-2xl font-serif font-bold text-primary dark:text-black leading-tight">AI Picks <br /><span className="text-secondary dark:text-black italic">For You</span></h2>
                  </div>
-                 <p className="text-white/80 text-sm leading-relaxed mb-8 font-medium">
+                 <p className="text-muted dark:text-black/80 text-sm leading-relaxed mb-8 font-medium">
                    Based on your past preferences for hills and sustainable stays, we recommend:
                  </p>
                  
@@ -119,20 +118,20 @@ const Dashboard = () => {
                       { name: "Cloud 9 Valley Lodge", location: "Nainital", desc: "Eco-certified mountain lodge with panoramic valley views." },
                       { name: "Whispering Woods", location: "Rishikesh", desc: "Private river-side retreat focused on wellness and yoga." }
                     ].map((pick, idx) => (
-                      <div key={idx} className="p-5 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-all cursor-pointer group">
-                        <h4 className="font-bold text-secondary group-hover:translate-x-1 transition-transform">{pick.name}</h4>
-                        <p className="text-[11px] uppercase tracking-widest text-white/60 mt-1 font-bold">{pick.location}</p>
-                        <p className="text-sm text-white/90 mt-3 italic leading-relaxed">"{pick.desc}"</p>
+                      <div key={idx} className="p-5 bg-primary/5 dark:bg-black/5 rounded-2xl border border-secondary/10 dark:border-black/10 hover:bg-secondary/10 dark:hover:bg-black/10 transition-all cursor-pointer group">
+                        <h4 className="font-bold text-primary dark:text-black group-hover:translate-x-1 transition-transform">{pick.name}</h4>
+                        <p className="text-[11px] uppercase tracking-widest text-muted dark:text-black mt-1 font-bold">{pick.location}</p>
+                        <p className="text-sm text-muted dark:text-black mt-3 italic leading-relaxed">"{pick.desc}"</p>
                       </div>
                     ))}
                  </div>
-                 <button className="w-full mt-10 py-4 bg-secondary text-primary rounded-full font-bold transition-all hover:bg-white hover:scale-[1.02] shadow-xl">
+                 <button className="w-full mt-10 py-4 bg-primary dark:bg-black text-white dark:text-yellow-400 rounded-full font-bold transition-all hover:bg-secondary dark:hover:bg-primary hover:scale-[1.02] shadow-xl">
                    Explore Full Analysis
                  </button>
                </div>
             </div>
 
-            <div className="bg-white dark:bg-luxury-dark rounded-3xl p-8 shadow-luxury border border-secondary/10">
+            <div className="bg-card text-card-foreground rounded-3xl p-8 shadow-luxury border border-white/5">
               <h3 className="font-serif font-bold text-xl text-primary dark:text-foreground mb-4">Travel Pulse</h3>
               <div className="space-y-4">
                  {[
@@ -140,10 +139,10 @@ const Dashboard = () => {
                   { label: "AI Plans", value: "4", icon: MapPin },
                   { label: "Rewards", value: "2.4k", icon: Star },
                 ].map((stat, i) => (
-                  <div key={i} className="flex flex-col items-center p-4 bg-primary/5 dark:bg-white/5 rounded-2xl">
+                  <div key={i} className="flex flex-col items-center p-4 bg-slate-50 dark:bg-white/5 rounded-2xl">
                     <stat.icon className="w-5 h-5 text-secondary mb-2" />
-                    <span className="text-xl font-bold text-primary dark:text-white">{stat.value}</span>
-                    <span className="text-[10px] uppercase font-bold text-primary/40 dark:text-secondary/60">{stat.label}</span>
+                    <span className="text-xl font-bold text-primary">{stat.value}</span>
+                    <span className="text-[10px] uppercase font-bold text-primary">{stat.label}</span>
                   </div>
                 ))}
               </div>
