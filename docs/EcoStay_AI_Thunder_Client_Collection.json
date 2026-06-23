@@ -1,0 +1,154 @@
+{
+  "collectionName": "EcoStay AI API Collection",
+  "folderName": "Homestays",
+  "requests": [
+    {
+      "name": "Get All Homestays",
+      "method": "GET",
+      "url": "{{base_url}}/api/homestays/",
+      "headers": [],
+      "params": [],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 200,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Mountain View Homestay\",\n            \"location\": \"Nainital\",\n            \"price_per_night\": 2500,\n            \"description\": \"Luxury mountain stay\",\n            \"rating\": 4.8,\n            \"created_at\": \"2024-06-23T07:12:00Z\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Homestay",
+      "method": "POST",
+      "url": "{{base_url}}/api/homestays/",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"title\": \"Mountain View Homestay\",\n    \"location\": \"Nainital\",\n    \"price_per_night\": 2500,\n    \"description\": \"Luxury mountain stay\",\n    \"rating\": 4.8\n}"
+      },
+      "params": [],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 201,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Homestay created successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Mountain View Homestay\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 2500,\n        \"description\": \"Luxury mountain stay\",\n        \"rating\": 4.8,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Homestay by ID",
+      "method": "GET",
+      "url": "{{base_url}}/api/homestays/1",
+      "headers": [],
+      "params": [],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 200,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Mountain View Homestay\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 2500,\n        \"description\": \"Luxury mountain stay\",\n        \"rating\": 4.8,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+        },
+        {
+          "name": "Error Response - Not Found",
+          "statusCode": 404,
+          "body": "{\n    \"success\": false,\n    \"message\": \"Resource not found\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Homestay (Full)",
+      "method": "PUT",
+      "url": "{{base_url}}/api/homestays/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"title\": \"Updated Mountain View\",\n    \"location\": \"Nainital\",\n    \"price_per_night\": 3000,\n    \"description\": \"Updated luxury stay\",\n    \"rating\": 4.9\n}"
+      },
+      "params": [],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 200,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Homestay updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Updated Mountain View\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 3000,\n        \"description\": \"Updated luxury stay\",\n        \"rating\": 4.9,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Homestay (Partial)",
+      "method": "PATCH",
+      "url": "{{base_url}}/api/homestays/1",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"price_per_night\": 3500\n}"
+      },
+      "params": [],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 200,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Homestay partially updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Updated Mountain View\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 3500,\n        \"description\": \"Updated luxury stay\",\n        \"rating\": 4.9,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Delete Homestay",
+      "method": "DELETE",
+      "url": "{{base_url}}/api/homestays/1",
+      "headers": [],
+      "params": [],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 200,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Homestay deleted successfully\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Search Homestays",
+      "method": "GET",
+      "url": "{{base_url}}/api/homestays/search?location=Goa",
+      "headers": [],
+      "params": [
+        {
+          "name": "location",
+          "value": "Goa"
+        }
+      ],
+      "tests": [],
+      "examples": [
+        {
+          "name": "Success Response",
+          "statusCode": 200,
+          "body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"title\": \"Beach Side Villa\",\n            \"location\": \"Goa\",\n            \"price_per_night\": 5000,\n            \"description\": \"Beautiful beach stay\",\n            \"rating\": 4.7,\n            \"created_at\": \"2024-06-23T07:12:00Z\"\n        }\n    ]\n}"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "headers": [],
+    "options": {
+      "baseUrl": "http://localhost:8000"
+    }
+  }
+}

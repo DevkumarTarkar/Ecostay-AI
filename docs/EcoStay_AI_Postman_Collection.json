@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "ecostay-ai-api-collection",
+		"name": "EcoStay AI API Collection",
+		"description": "API collection for EcoStay AI backend endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Homestays",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/homestays/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/homestays/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Mountain View Homestay\",\n            \"location\": \"Nainital\",\n            \"price_per_night\": 2500,\n            \"description\": \"Luxury mountain stay\",\n            \"rating\": 4.8,\n            \"created_at\": \"2024-06-23T07:12:00Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Homestay",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Mountain View Homestay\",\n    \"location\": \"Nainital\",\n    \"price_per_night\": 2500,\n    \"description\": \"Luxury mountain stay\",\n    \"rating\": 4.8\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/homestays/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Mountain View Homestay\",\n    \"location\": \"Nainital\",\n    \"price_per_night\": 2500,\n    \"description\": \"Luxury mountain stay\",\n    \"rating\": 4.8\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/homestays/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								""
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Homestay created successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Mountain View Homestay\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 2500,\n        \"description\": \"Luxury mountain stay\",\n        \"rating\": 4.8,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Homestay by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/homestays/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/homestays/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Mountain View Homestay\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 2500,\n        \"description\": \"Luxury mountain stay\",\n        \"rating\": 4.8,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+				},
+				{
+					"name": "Error Response - Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/homestays/999",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								"999"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"message\": \"Resource not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Homestay (Full)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Updated Mountain View\",\n    \"location\": \"Nainital\",\n    \"price_per_night\": 3000,\n    \"description\": \"Updated luxury stay\",\n    \"rating\": 4.9\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/homestays/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Mountain View\",\n    \"location\": \"Nainital\",\n    \"price_per_night\": 3000,\n    \"description\": \"Updated luxury stay\",\n    \"rating\": 4.9\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/homestays/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Homestay updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Updated Mountain View\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 3000,\n        \"description\": \"Updated luxury stay\",\n        \"rating\": 4.9,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Homestay (Partial)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price_per_night\": 3500\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/homestays/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price_per_night\": 3500\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/homestays/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Homestay partially updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"title\": \"Updated Mountain View\",\n        \"location\": \"Nainital\",\n        \"price_per_night\": 3500,\n        \"description\": \"Updated luxury stay\",\n        \"rating\": 4.9,\n        \"created_at\": \"2024-06-23T07:12:00Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Homestay",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/homestays/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/homestays/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Homestay deleted successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Search Homestays",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/homestays/search?location=Goa",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"homestays",
+						"search"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Goa"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/homestays/search?location=Goa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"homestays",
+								"search"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Goa"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Operation successful\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"title\": \"Beach Side Villa\",\n            \"location\": \"Goa\",\n            \"price_per_night\": 5000,\n            \"description\": \"Beautiful beach stay\",\n            \"rating\": 4.7,\n            \"created_at\": \"2024-06-23T07:12:00Z\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
