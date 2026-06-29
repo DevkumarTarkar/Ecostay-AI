@@ -153,7 +153,7 @@ http://localhost:3000
 
 ---
 
-## 3️⃣ Backend Setup
+## 3️⃣ How to run backend locally
 
 ```bash
 cd backend
@@ -233,7 +233,7 @@ https://github.com/DevkumarTarkar
 
 LinkedIn
 
-https://www.linkedin.com/
+https://www.linkedin.com/in/dev-kumar-tarkar-55189731a/
 
 ---
 
