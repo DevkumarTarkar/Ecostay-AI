@@ -58,6 +58,24 @@ The platform combines a modern **Next.js** frontend with a **FastAPI REST API** 
 | Version Control | Git & GitHub |
 
 ---
+---
+
+# 🗄️ Database
+
+## Database Choice
+
+This project uses **PostgreSQL** hosted on **Supabase** as the primary relational database.
+
+## Why PostgreSQL?
+
+- Reliable relational database
+- ACID-compliant transactions
+- High performance
+- Easy integration with SQLAlchemy
+- Cloud-hosted using Supabase
+- Scalable for production applications
+
+---
 
 # 📂 Project Structure
 
@@ -125,6 +143,21 @@ Ecostay-AI
 
 ---
 
+## Database Integration
+
+All API endpoints perform CRUD operations directly on the PostgreSQL database using SQLAlchemy ORM.
+
+Implemented Endpoints:
+
+- ✅ Get All Homestays
+- ✅ Get Homestay by ID
+- ✅ Create Homestay
+- ✅ Update Homestay
+- ✅ Partial Update
+- ✅ Delete Homestay
+- ✅ Search Homestays
+
+---
 # 🚀 Getting Started
 
 ## 1️⃣ Clone Repository
@@ -190,6 +223,45 @@ DATABASE_URL=your_database_url
 ```
 
 Refer to `.env.example` for the required environment variables.
+
+---
+---
+
+# ⚙️ Set Up Database
+
+1. Create a PostgreSQL database (Supabase or local PostgreSQL).
+
+2. Create a `.env` file inside the `backend` folder.
+
+```env
+DATABASE_URL=your_database_url
+API_PORT=8000
+```
+
+3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Start the backend
+
+```bash
+uvicorn app.main:app --reload
+```
+
+The API will be available at:
+
+```
+http://localhost:8000
+```
+
+---
+# 🗂️ Database Schema
+
+The database schema used in this project is shown below.
+
+![Database Schema](docs/schema-diagram.png)
 
 ---
 
