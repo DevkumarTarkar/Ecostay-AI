@@ -36,9 +36,20 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-serif font-bold mb-6 text-secondary">Quick Links</h4>
           <ul className="space-y-4">
-            {['Home', 'About Us', 'Our Villas', 'Sustainable Vision', 'Contact'].map((link) => (
-              <li key={link}>
-                <Link href="#" className="text-slate-600 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium">{link}</Link>
+            {[
+              { name: 'Home', href: '/' },
+              { name: 'About Us', href: '/about' },
+              { name: 'Our Villas', href: '/villas' },
+              { name: 'Sustainable Vision', href: '/about' },
+              { name: 'Contact', href: '/contact' }
+            ].map((link) => (
+              <li key={link.name}>
+                <Link 
+                  href={link.href} 
+                  className="text-slate-600 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium cursor-pointer"
+                >
+                  {link.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -48,9 +59,20 @@ const Footer = () => {
         <div>
           <h4 className="text-lg font-serif font-bold mb-6 text-secondary">Top Destinations</h4>
           <ul className="space-y-4">
-            {['Goa Luxury Collections', 'Manali Hill Retreats', 'Udaipur Heritage Stays', 'Coorg Coffee Estates', 'Rishikesh Yoga Centers'].map((link) => (
+            {[
+              'Goa Luxury Collections', 
+              'Manali Hill Retreats', 
+              'Udaipur Heritage Stays', 
+              'Coorg Coffee Estates', 
+              'Rishikesh Yoga Centers'
+            ].map((link) => (
               <li key={link}>
-                <Link href="#" className="text-slate-600 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium">{link}</Link>
+                <Link 
+                  href="/villas" 
+                  className="text-slate-600 dark:text-white/60 hover:text-primary dark:hover:text-white transition-colors font-medium cursor-pointer"
+                >
+                  {link}
+                </Link>
               </li>
             ))}
           </ul>
@@ -80,8 +102,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 dark:text-white/40 text-sm">
         <p>© 2024 EcoStay AI. All rights reserved.</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-primary dark:hover:text-white">Privacy Policy</a>
-          <a href="#" className="hover:text-primary dark:hover:text-white">Terms of Service</a>
+          <Link href="/privacy" className="hover:text-primary dark:hover:text-white cursor-pointer">Privacy Policy</Link>
+          <Link href="/terms" className="hover:text-primary dark:hover:text-white cursor-pointer">Terms of Service</Link>
         </div>
       </div>
     </footer>

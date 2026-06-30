@@ -1,59 +1,49 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PropertyCard from '@/components/PropertyCard';
 import { Search, MapPin, SlidersHorizontal } from 'lucide-react';
-import { Input } from '@/components/ui';
-
-const properties = [
-  {
-    name: "Mountain View Homestay",
-    location: "Manali, Himachal Pradesh",
-    price: "8,500",
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=2000&auto=format&fit=crop"
-  },
-  {
-    name: "Forest Eco Retreat",
-    location: "Coorg, Karnataka",
-    price: "12,000",
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    name: "Lake Side Villa",
-    location: "Nainital, Uttarakhand",
-    price: "15,500",
-    rating: 5.0,
-    image: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    name: "Sunset Pool Villa",
-    location: "Goa, North Goa",
-    price: "22,000",
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    name: "Valley Escape Retreat",
-    location: "Rishikesh, Uttarakhand",
-    price: "9,000",
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=2080&auto=format&fit=crop"
-  },
-  {
-    name: "Riverside Luxury Stay",
-    location: "Udaipur, Rajasthan",
-    price: "18,500",
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop"
-  }
-];
+import { Input, Loader, Toast } from '@/components/ui';
 
 export default function VillasPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [properties, setProperties] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/homestays/')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((response) => {
+        console.log('Villas homestays response:', response);
+
+        if (response.success && Array.isArray(response.data)) {
+          const formattedData = response.data.map((item: any) => ({
+            name: item.title,
+            location: item.location,
+            price: item.price_per_night.toString(),
+            rating: item.rating,
+            image:
+              'https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=2000&auto=format&fit=crop'
+          }));
+
+          setProperties(formattedData);
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching homestays:', error);
+        setError('Failed to load villas. Please check your connection.');
+        setLoading(false);
+      });
+  }, []);
   
   const filteredProperties = properties.filter(p => 
     p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -94,16 +84,30 @@ export default function VillasPage() {
         </div>
 
         {/* Results Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProperties.length > 0 ? (
-            filteredProperties.map((prop, idx) => (
-              <PropertyCard key={idx} {...prop} />
-            ))
+        <div className="relative min-h-[400px]">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-32 animate-in fade-in duration-700">
+              <Loader variant="spinner" className="mb-6 scale-150" />
+              <p className="text-xl font-serif text-primary/40 italic">Finding your exquisite sanctuary...</p>
+            </div>
           ) : (
-            <div className="col-span-full py-20 text-center border-2 border-dashed border-secondary/20 rounded-[3rem]">
-              <p className="text-xl font-serif text-primary/60 dark:text-foreground/60 italic">No properties found matching your search.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              {filteredProperties.length > 0 ? (
+                filteredProperties.map((prop, idx) => (
+                  <PropertyCard key={idx} {...prop} />
+                ))
+              ) : (
+                <div className="col-span-full py-20 text-center border-2 border-dashed border-secondary/20 rounded-[3rem]">
+                  <p className="text-xl font-serif text-primary/60 dark:text-foreground/60 italic">No properties found matching your search.</p>
+                </div>
+              )}
             </div>
           )}
+        </div>
+
+        {/* Floating Toast Notification */}
+        <div className="fixed bottom-8 right-8 z-50">
+          {error && <Toast message={error} type="error" onClose={() => setError(null)} />}
         </div>
       </div>
 

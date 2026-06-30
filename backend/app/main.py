@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from .routes import homestay_routes
 from .middleware.exception_handler import exception_handler
 from .database import engine, Base
@@ -10,6 +11,15 @@ from .database import engine, Base
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="EcoStay AI API", version="1.0.0")
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Register Routes
 app.include_router(homestay_routes.router, prefix="/api")
