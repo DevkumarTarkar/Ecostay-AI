@@ -26,10 +26,10 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest uppercase bg-yellow-400 text-primary rounded-full shadow-lg">
+          <span className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-widest uppercase bg-accent text-primary dark:text-black rounded-full shadow-lg">
             Premium Escapes
           </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-[1.1] max-w-4xl">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-[1.1] max-w-4xl italic">
             Luxury Villas & <br /> 
             <span className="luxury-text-gradient">Eco Stays</span> Across India
           </h1>
@@ -39,7 +39,7 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-            <button className="px-8 py-4 bg-yellow-400 text-primary rounded-full font-bold text-lg flex items-center justify-center gap-2 transition-all hover:bg-white hover:scale-105 active:scale-95 shadow-2xl">
+            <button className="px-8 py-4 bg-accent text-black rounded-full font-bold text-lg flex items-center justify-center gap-2 transition-all hover:bg-white hover:scale-105 active:scale-95 shadow-2xl">
               Explore Villas
               <ArrowRight className="w-5 h-5" />
             </button>

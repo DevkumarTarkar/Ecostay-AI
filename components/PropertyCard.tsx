@@ -37,23 +37,23 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ name, location, price, rati
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <div className="flex items-center gap-1.5 mb-2 font-extrabold opacity-100 text-black dark:text-white/70">
-            <MapPin className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
-            <span className="text-xs uppercase tracking-wider">LOC: {location}</span>
+        <div className="p-6 bg-white dark:bg-card">
+          <div className="flex items-center gap-1.5 mb-2 text-secondary">
+            <MapPin className="w-4 h-4 text-accent" />
+            <span className="text-xs uppercase tracking-wider font-bold">{location}</span>
           </div>
-          <h3 className="text-xl font-sans font-extrabold mb-3 group-hover:text-yellow-700 dark:group-hover:text-yellow-400 transition-colors line-clamp-1 opacity-100 text-black dark:text-white">
-            NAME: {name}
+          <h3 className="text-2xl font-serif font-bold text-primary dark:text-foreground group-hover:text-accent dark:group-hover:text-accent transition-colors line-clamp-1 italic">
+            {name}
           </h3>
-          <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-secondary/10">
             <div>
-              <span className="text-sm font-extrabold opacity-100 text-black/50 dark:text-white/60">Starting from</span>
-              <p className="text-xl font-extrabold text-black dark:text-yellow-400 opacity-100">
-                PRICE: ₹{price} <span className="text-sm font-normal text-black/40 dark:text-white/40">/ night</span>
+              <span className="text-xs uppercase tracking-widest font-bold text-muted">Starting from</span>
+              <p className="text-xl font-bold text-primary dark:text-accent mt-0.5">
+                ₹{price} <span className="text-sm font-normal text-muted">/ night</span>
               </p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-yellow-400/10 flex items-center justify-center group-hover:bg-yellow-400 transition-all duration-500">
-               <Eye className="w-5 h-5 text-yellow-400 group-hover:text-primary" />
+            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-all duration-500">
+               <Eye className="w-5 h-5 text-accent group-hover:text-white" />
             </div>
           </div>
         </div>

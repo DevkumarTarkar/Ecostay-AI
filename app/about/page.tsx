@@ -26,7 +26,7 @@ const AboutPage = () => {
           >
             About EcoStay AI
           </motion.h1>
-          <div className="w-24 h-1 bg-secondary mx-auto mb-8" />
+          <div className="w-24 h-1 bg-accent mx-auto mb-8" />
           <p className="text-xl max-w-2xl mx-auto text-white/80">
             Pioneering the intersection of luxury hospitality and environmental consciousness through artificial intelligence.
           </p>
@@ -44,8 +44,8 @@ const AboutPage = () => {
           >
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Target className="text-secondary w-8 h-8" />
-                <h2 className="text-3xl font-serif font-bold text-black dark:text-secondary">Our Mission</h2>
+                <Target className="text-accent w-8 h-8" />
+                <h2 className="text-3xl font-serif font-bold text-primary dark:text-secondary">Our Mission</h2>
               </div>
               <p className="text-black dark:text-white/80 leading-relaxed text-lg font-medium">
                 To provide travelers with unparalleled luxury experiences that are deeply rooted in sustainability. We believe that true luxury shouldn't cost the Earth. By curating the finest eco-stays, we aim to transform how India travels.
@@ -53,8 +53,8 @@ const AboutPage = () => {
             </div>
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <Eye className="text-secondary w-8 h-8" />
-                <h2 className="text-3xl font-serif font-bold text-black dark:text-secondary">Sustainable Vision</h2>
+                <Eye className="text-accent w-8 h-8" />
+                <h2 className="text-3xl font-serif font-bold text-primary dark:text-secondary">Sustainable Vision</h2>
               </div>
               <p className="text-black dark:text-white/80 leading-relaxed text-lg font-medium">
                 Our vision is to build a network of 1000+ carbon-neutral villas across India by 2030, powered by AI that optimizes energy consumption and minimizes waste while maximizing guest comfort.
@@ -87,10 +87,10 @@ const AboutPage = () => {
               { icon: Users, title: "AI-Curated Comfort", desc: "From room temperature to local hidden gems, our AI personalizes every aspect of your stay." }
             ].map((feature, idx) => (
               <div key={idx} className="text-center space-y-4">
-                <div className="w-20 h-20 bg-primary/5 dark:bg-yellow-400/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6 group hover:bg-secondary dark:hover:bg-yellow-400 transition-colors duration-500">
-                  <feature.icon className="w-10 h-10 text-primary dark:text-yellow-400 transition-colors group-hover:text-white dark:group-hover:text-primary" />
+                <div className="w-20 h-20 bg-primary/5 dark:bg-accent/10 rounded-[2rem] flex items-center justify-center mx-auto mb-6 group hover:bg-accent dark:hover:bg-accent transition-colors duration-500">
+                  <feature.icon className="w-10 h-10 text-primary dark:text-accent transition-colors group-hover:text-white dark:group-hover:text-black" />
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-black dark:text-white">{feature.title}</h3>
+                <h3 className="text-2xl font-serif font-bold text-primary dark:text-white">{feature.title}</h3>
                 <p className="text-black dark:text-white/60 leading-relaxed font-medium">{feature.desc}</p>
               </div>
             ))}

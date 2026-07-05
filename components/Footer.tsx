@@ -10,10 +10,10 @@ const Footer = () => {
         <div className="space-y-6">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="bg-primary p-2 rounded-xl transition-transform group-hover:scale-110 shadow-md">
-              <Leaf className="w-6 h-6 text-yellow-400" />
+              <Leaf className="w-6 h-6 text-accent" />
             </div>
             <span className="text-2xl font-serif font-bold text-primary dark:text-white tracking-tight">
-              EcoStay <span className="text-secondary">AI</span>
+              EcoStay <span className="text-accent">AI</span>
             </span>
           </Link>
           <p className="text-slate-600 dark:text-white/60 leading-relaxed max-w-xs font-medium">
@@ -24,9 +24,9 @@ const Footer = () => {
               <a 
                 key={i} 
                 href="#" 
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transition-all hover:bg-yellow-400 hover:text-primary group"
+                className="w-10 h-10 rounded-full bg-primary/5 dark:bg-white/10 flex items-center justify-center transition-all hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-black group border border-secondary/10"
               >
-                <Icon className="w-5 h-5 text-white group-hover:text-primary" />
+                <Icon className="w-5 h-5 text-primary dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
               </a>
             ))}
           </div>
@@ -34,7 +34,7 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-serif font-bold mb-6 text-secondary">Quick Links</h4>
+          <h4 className="text-lg font-serif font-bold mb-6 text-primary dark:text-secondary">Quick Links</h4>
           <ul className="space-y-4">
             {[
               { name: 'Home', href: '/' },
@@ -57,7 +57,7 @@ const Footer = () => {
 
         {/* Destinations */}
         <div>
-          <h4 className="text-lg font-serif font-bold mb-6 text-secondary">Top Destinations</h4>
+          <h4 className="text-lg font-serif font-bold mb-6 text-primary dark:text-secondary">Top Destinations</h4>
           <ul className="space-y-4">
             {[
               'Goa Luxury Collections', 
@@ -80,7 +80,7 @@ const Footer = () => {
 
         {/* Contact Info */}
         <div className="space-y-6">
-          <h4 className="text-lg font-serif font-bold mb-6 text-secondary">Get in Touch</h4>
+          <h4 className="text-lg font-serif font-bold mb-6 text-primary dark:text-secondary">Get in Touch</h4>
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-secondary shrink-0 mt-1" />

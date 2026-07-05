@@ -1,70 +1,83 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: #E0F2FE; /* Sky Blue background for Light Mode */
-    --foreground: #0F172A;
-    --primary: #1E293B;
-    --secondary: #94A3B8;
-    --accent: #FACC15; /* Yellow for branding items */
-    --muted: #64748B;
-    --card: #FFFFFF;
-    --card-foreground: #0F172A;
-    color-scheme: light;
-  }
-
-  .dark {
-    --background: #020617;
-    --foreground: #F8FAFC;
-    --primary: #38BDF8;
-    --secondary: #94A3B8;
-    --card: #0F172A;
-    --card-foreground: #FFFFFF;
-    color-scheme: dark;
-  }
-}
-
 @theme {
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-luxury-dark: var(--luxury-dark);
+  /* Define colors in the theme so Tailwind v4 generates utility classes */
+  --color-background: #F8F7F4; /* Soft warm cream */
+  --color-foreground: #1E2D24; /* Deep slate forest */
+  --color-primary: #2C3E35; /* Rich moss forest green */
+  --color-secondary: #6B7F73; /* Sage/olive slate */
+  --color-accent: #C5A880; /* Elegant champagne gold */
+  --color-muted: #5C6F63;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #1E2D24;
+  --color-luxury-dark: #0F1813;
   
   --font-sans: var(--font-inter), sans-serif;
   --font-serif: var(--font-playfair), serif;
   
-  --shadow-luxury: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
-  --shadow-luxury-hover: 0 20px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-luxury: 0 20px 40px -15px rgba(12, 20, 16, 0.05);
+  --shadow-luxury-hover: 0 30px 60px -20px rgba(12, 20, 16, 0.12);
+  --shadow-gold-glow: 0 0 25px rgba(197, 168, 128, 0.2);
+}
+
+/* Enable class-based dark mode variant for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+/* Runtime overrides for Dark Mode variables */
+.dark {
+  --color-background: #090F0C; /* Rich forest obsidian */
+  --color-foreground: #F4F6F5; /* Crisp natural cream */
+  --color-primary: #D4AF37; /* Metallic leaf gold */
+  --color-secondary: #7A9082; /* Forest sage */
+  --color-accent: #E5C158; /* Bright champagne gold */
+  --color-muted: #8FA295;
+  --color-card: #111B16; /* Deep moss slate card */
+  --color-card-foreground: #F4F6F5;
+  --color-luxury-dark: #050807;
+  color-scheme: dark;
 }
 
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans transition-colors duration-300;
+    @apply bg-background text-foreground font-sans transition-colors duration-500 antialiased;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+    @apply font-serif tracking-wide;
   }
 }
 
-
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Glassmorphism styling */
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: var(--shadow-luxury);
 }
 
+.dark .glass-card {
+  background: rgba(17, 27, 22, 0.45);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* Luxury gradients */
 .luxury-gradient {
-  background: linear-gradient(135deg, #0F172A 0%, #020617 100%);
+  background: linear-gradient(135deg, #1C2B22 0%, #090F0C 100%);
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #E2C7A3 0%, #C5A880 100%);
 }
 
 .luxury-text-gradient {
-  background: linear-gradient(to right, #94A3B8, #F8FAFC);
+  background: linear-gradient(to right, #FAF8F5, #C5A880);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-
+/* Smooth custom transitions */
+.transition-luxury {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}

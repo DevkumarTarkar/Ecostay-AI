@@ -7,6 +7,7 @@ import PropertyCard from '@/components/PropertyCard';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Shield, Leaf, Zap, Map } from 'lucide-react';
+import { fetchHomestays } from '@/app/lib/api';
 
 const destinations = [
   { name: "Goa", image: "https://images.unsplash.com/photo-1512757776214-26d36777b513?q=80&w=2000&auto=format&fit=crop", count: "45+ Villas" },
@@ -21,13 +22,7 @@ const Home = () => {
   const [properties, setProperties] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/homestays/')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        return res.json();
-      })
+    fetchHomestays()
       .then((response) => {
         console.log('Homestays response:', response);
 
@@ -68,7 +63,7 @@ const Home = () => {
             </p>
           </div>
 
-          <button className="px-8 py-3 border-2 border-primary text-primary rounded-full font-bold hover:bg-primary hover:text-white transition-all shadow-md">
+          <button className="px-8 py-3 border-2 border-primary/30 text-primary dark:text-accent rounded-full font-bold hover:bg-primary hover:text-white dark:hover:bg-accent dark:hover:text-black transition-all shadow-md">
             View All Properties
           </button>
         </div>
@@ -91,7 +86,7 @@ const Home = () => {
       <section className="py-24 bg-card text-card-foreground border-y border-secondary/10 dark:border-white/5">
         <div className="max-w-7xl mx-auto px-6 text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 text-black dark:text-white">
-            Why Choose <span className="text-yellow-600 dark:text-yellow-400">EcoStay AI</span>
+            Why Choose <span className="text-accent">EcoStay AI</span>
           </h2>
 
           <p className="text-black/60 dark:text-white/60 text-lg max-w-2xl mx-auto font-medium">
@@ -111,15 +106,15 @@ const Home = () => {
               whileHover={{ y: -10 }}
               className="p-8 bg-black/5 dark:bg-white/5 backdrop-blur-sm rounded-3xl border border-secondary/10 dark:border-white/10 text-center shadow-sm"
             >
-              <div className="w-16 h-16 bg-yellow-600/10 dark:bg-yellow-400/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <item.icon className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
+              <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <item.icon className="w-8 h-8 text-accent" />
               </div>
 
-              <h3 className="text-xl font-bold mb-3 text-black dark:text-white">
+              <h3 className="text-xl font-bold mb-3 text-foreground">
                 {item.title}
               </h3>
 
-              <p className="text-black/50 dark:text-white/50 text-sm leading-relaxed">
+              <p className="text-muted text-sm leading-relaxed">
                 {item.desc}
               </p>
             </motion.div>

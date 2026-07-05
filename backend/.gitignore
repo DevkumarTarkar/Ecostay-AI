@@ -38,3 +38,11 @@ env/
 # IDE files
 .vscode/
 .idea/
+
+# Uploads directory
+uploads/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp

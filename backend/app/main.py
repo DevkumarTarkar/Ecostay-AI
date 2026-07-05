@@ -1,14 +1,21 @@
 import uvicorn
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from .routes import homestay_routes
 from .middleware.exception_handler import exception_handler
 from .database import engine, Base
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
+
+# Create uploads directory if it doesn't exist
+UPLOADS_DIR = "uploads"
+if not os.path.exists(UPLOADS_DIR):
+    os.makedirs(UPLOADS_DIR)
 
 app = FastAPI(title="EcoStay AI API", version="1.0.0")
 
@@ -20,6 +27,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount static files for image uploads
+app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
 
 # Register Routes
 app.include_router(homestay_routes.router, prefix="/api")

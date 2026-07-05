@@ -53,3 +53,15 @@ next-env.d.ts
 !public/*.jpg
 !public/*.jpeg
 !public/*.webp
+
+# Temporary CRUD screenshots
+/1_read.png
+/2_create.png
+/3_update.png
+/4_delete.png
+
+# Compiled PDF Reports
+/W5_CRUDVerification_TBI-26100184.pdf
+/docs/W5_CRUDVerification_TBI-26100184.pdf
+
+

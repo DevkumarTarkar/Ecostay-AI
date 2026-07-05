@@ -49,8 +49,8 @@ export default function AIPlannerPage() {
           
           <div className="p-8 border-b border-secondary/10 flex items-center justify-between relative z-10">
             <div className="flex items-center gap-4">
-               <div className="w-12 h-12 rounded-2xl !bg-slate-300 dark:bg-white/70 flex items-center justify-center shadow-lg">
-                  <Sparkles className="w-6 h-6 text-black" />
+               <div className="w-12 h-12 rounded-2xl bg-accent/20 dark:bg-white/10 flex items-center justify-center shadow-lg">
+                  <Sparkles className="w-6 h-6 text-accent" />
                </div>
                <div>
                   <h2 className="text-2xl font-serif font-bold text-primary dark:text-foreground">AI Concierge</h2>
@@ -59,8 +59,8 @@ export default function AIPlannerPage() {
             </div>
             <div className="hidden md:flex gap-4">
                {[Compass, Hotel, Leaf].map((Icon, idx) => (
-                 <div key={idx} className="w-10 h-10 rounded-xl !bg-slate-300 dark:bg-white/70 flex items-center justify-center border border-secondary/10 shadow-sm transition-transform hover:scale-110">
-                   <Icon className="w-5 h-5 text-black" />
+                 <div key={idx} className="w-10 h-10 rounded-xl bg-accent/10 dark:bg-white/10 flex items-center justify-center border border-secondary/10 shadow-sm transition-transform hover:scale-110">
+                   <Icon className="w-5 h-5 text-accent dark:text-white" />
                  </div>
                ))}
             </div>

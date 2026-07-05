@@ -16,7 +16,12 @@ class HomestayService:
 
     @staticmethod
     def create(db: Session, homestay_data: HomestayCreate):
-        db_homestay = Homestay(**homestay_data.model_dump())
+        # Convert list to list for JSON storage
+        data_dict = homestay_data.model_dump()
+        data_dict['photos'] = []
+        data_dict['amenities'] = data_dict.get('amenities', [])
+        
+        db_homestay = Homestay(**data_dict)
         db.add(db_homestay)
         db.commit()
         db.refresh(db_homestay)
