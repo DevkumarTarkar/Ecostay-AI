@@ -5,9 +5,12 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from .routes import homestay_routes
+from .routes import homestay_routes, auth_routes
 from .middleware.exception_handler import exception_handler
 from .database import engine, Base
+from .routes.auth_routes import limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -18,6 +21,10 @@ if not os.path.exists(UPLOADS_DIR):
     os.makedirs(UPLOADS_DIR)
 
 app = FastAPI(title="EcoStay AI API", version="1.0.0")
+
+# Setup rate limiting state and error handlers
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Configure CORS
 app.add_middleware(
@@ -33,6 +40,7 @@ app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
 
 # Register Routes
 app.include_router(homestay_routes.router, prefix="/api")
+app.include_router(auth_routes.router)
 
 # Centralized Exception Handling
 @app.exception_handler(Exception)
@@ -40,6 +48,7 @@ async def common_exception_handler(request: Request, exc: Exception):
     return await exception_handler(request, exc)
 
 @app.exception_handler(RequestValidationError)
+
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=400,

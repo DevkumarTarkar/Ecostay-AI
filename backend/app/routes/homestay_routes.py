@@ -8,6 +8,9 @@ from ..database import get_db
 from ..schemas.homestay import Homestay, HomestayCreate, HomestayUpdate
 from ..schemas.response import SuccessResponse, ErrorResponse
 from ..services.homestay_service import HomestayService
+from ..dependencies.auth import get_current_user
+from ..models.user import User
+
 
 router = APIRouter(prefix="/homestays", tags=["homestays"])
 
@@ -35,26 +38,30 @@ def get_homestay(id: int, db: Session = Depends(get_db)):
     return SuccessResponse(data=homestay)
 
 @router.post("/", response_model=SuccessResponse[Homestay], status_code=status.HTTP_201_CREATED)
-def create_homestay(homestay_data: HomestayCreate, db: Session = Depends(get_db)):
+def create_homestay(homestay_data: HomestayCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+
     homestay = HomestayService.create(db, homestay_data)
     return SuccessResponse(message="Homestay created successfully", data=homestay)
 
 @router.put("/{id}", response_model=SuccessResponse[Homestay])
-def update_homestay(id: int, homestay_data: HomestayUpdate, db: Session = Depends(get_db)):
+def update_homestay(id: int, homestay_data: HomestayUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+
     homestay = HomestayService.update(db, id, homestay_data)
     if not homestay:
         raise HTTPException(status_code=404, detail="Resource not found")
     return SuccessResponse(message="Homestay updated successfully", data=homestay)
 
 @router.patch("/{id}", response_model=SuccessResponse[Homestay])
-def partial_update_homestay(id: int, homestay_data: HomestayUpdate, db: Session = Depends(get_db)):
+def partial_update_homestay(id: int, homestay_data: HomestayUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+
     homestay = HomestayService.update(db, id, homestay_data)
     if not homestay:
         raise HTTPException(status_code=404, detail="Resource not found")
     return SuccessResponse(message="Homestay partially updated successfully", data=homestay)
 
 @router.delete("/{id}", response_model=SuccessResponse)
-def delete_homestay(id: int, db: Session = Depends(get_db)):
+def delete_homestay(id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+
     success = HomestayService.delete(db, id)
     if not success:
         raise HTTPException(status_code=404, detail="Resource not found")
@@ -66,7 +73,8 @@ async def upload_photo(
     id: int,
     file: UploadFile = File(...),
     is_featured: bool = False,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     """Upload a photo for a homestay"""
     homestay = HomestayService.get_by_id(db, id)
@@ -106,7 +114,7 @@ async def upload_photo(
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
 @router.delete("/{id}/photos/{photo_index}", response_model=SuccessResponse)
-async def delete_photo(id: int, photo_index: int, db: Session = Depends(get_db)):
+async def delete_photo(id: int, photo_index: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     """Delete a specific photo from a homestay"""
     homestay = HomestayService.get_by_id(db, id)
     if not homestay:
@@ -137,7 +145,7 @@ async def delete_photo(id: int, photo_index: int, db: Session = Depends(get_db))
         raise HTTPException(status_code=500, detail=f"Deletion failed: {str(e)}")
 
 @router.put("/{id}/photos/{photo_index}/set-featured", response_model=SuccessResponse)
-async def set_featured_photo(id: int, photo_index: int, db: Session = Depends(get_db)):
+async def set_featured_photo(id: int, photo_index: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     """Set a photo as the featured photo"""
     homestay = HomestayService.get_by_id(db, id)
     if not homestay:

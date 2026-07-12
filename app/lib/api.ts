@@ -3,6 +3,20 @@ export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost
 
 console.log('API_BASE_URL:', API_BASE_URL);
 
+function getAuthHeaders() {
+  const headers: any = {
+    'Content-Type': 'application/json',
+  };
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('ecostay_token');
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+  }
+  return headers;
+}
+
+
 export async function fetchHomestays() {
   try {
     console.log('Fetching from:', `${API_BASE_URL}/homestays`);
@@ -63,9 +77,7 @@ export async function createHomestay(data: any) {
   try {
     const response = await fetch(`${API_BASE_URL}/homestays/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     if (!response.ok) {
@@ -82,9 +94,7 @@ export async function updateHomestay(id: number, data: any) {
   try {
     const response = await fetch(`${API_BASE_URL}/homestays/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
       body: JSON.stringify(data),
     });
     if (!response.ok) {
@@ -101,9 +111,7 @@ export async function deleteHomestay(id: number) {
   try {
     const response = await fetch(`${API_BASE_URL}/homestays/${id}`, {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: getAuthHeaders(),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

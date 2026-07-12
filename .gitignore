@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
+# env files (frontend)
 .env
 .env.local
 .env.development.local
@@ -37,15 +37,16 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Idea/VSCode
+# Editor
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Project Specific
+# Project tool
 .gemini/
 
+# Images (except public assets)
 *.jpg
 *.jpeg
 *.webp
@@ -54,14 +55,62 @@ next-env.d.ts
 !public/*.jpeg
 !public/*.webp
 
-# Temporary CRUD screenshots
+# ─── Backend (Python / FastAPI) ───────────────────────────
+# Virtual environments
+backend/venv/
+backend/.venv/
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Python eggs / build
+*.egg-info/
+dist/
+*.egg
+
+# Backend env (secrets)
+backend/.env
+
+# SQLite database (auto-generated, not source code)
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded user files (runtime data)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ─── Generated / Temporary Files ───────────────────────────
+# Week 5 CRUD screenshots
 /1_read.png
 /2_create.png
 /3_update.png
 /4_delete.png
 
-# Compiled PDF Reports
-/W5_CRUDVerification_TBI-26100184.pdf
-/docs/W5_CRUDVerification_TBI-26100184.pdf
+# Week 6 Auth flow captured screenshots
+/1_register_form.png
+/2_register_success.png
+/3_login_form.png
+/4_login_success.png
+/5_unauthorized_redirect.png
+/6_oauth_consent.png
+/7_oauth_loggedin.png
+/8_rate_limiting.png
 
+# Compiled PDF Reports (submit separately, not source code)
+/W5_CRUDVerification_TBI-26100184.pdf
+/W6_AuthFlowScreenshots_TBI-26100184.pdf
+
+# Unnecessary docs (personal notes / old submissions)
+docs/W5_CRUDVerification_TBI-26100184.pdf
+docs/W5_SchemaDiagram_TBI-26100184.png
+docs/EcoStay_AI_CRUD_Collection.json
+docs/reflection_video_script.md
+docs/test_api.sh
 

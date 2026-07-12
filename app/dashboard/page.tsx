@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
+import { useAuth, ProtectedRoute } from '@/app/lib/auth';
+
 import { 
   Calendar, 
   Heart, 
@@ -29,11 +31,13 @@ import {
 } from '@/app/lib/api';
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<'profile' | 'admin'>('profile');
   const [homestays, setHomestays] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
 
   // Modal & Form States
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -186,7 +190,7 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
             <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary italic leading-tight">
-              Welcome back, <span className="text-yellow-500 underline decoration-primary/20">Aryan</span>
+              Welcome back, <span className="text-yellow-500 underline decoration-primary/20">{user?.full_name || "Guest"}</span>
             </h1>
             <p className="text-primary/70 mt-2 font-medium">
               {activeTab === 'profile' 
@@ -562,4 +566,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default function ProtectedDashboard() {
+  return (
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  );
+}

@@ -6,11 +6,13 @@ import { usePathname } from 'next/navigation';
 import { Leaf, Menu, X, Camera, Share2, Globe, Sun, Moon } from 'lucide-react';
 import { cn } from '@/app/lib/utils';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useAuth } from '@/app/lib/auth';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { isAuthenticated, logout } = useAuth();
   
   const isHomePage = pathname === '/';
   const isWhiteText = isHomePage && !isScrolled;
@@ -68,15 +70,36 @@ const Navbar = () => {
             </Link>
           ))}
           <ThemeToggle />
-          <Link
-            href="/login"
-            className={cn(
-              "px-6 py-2 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-lg",
-              "bg-accent text-black hover:bg-accent/90"
-            )}
-          >
-            Book Now
-          </Link>
+          
+          {isAuthenticated ? (
+            <div className="flex items-center gap-4">
+              <Link
+                href="/profile"
+                className={cn(
+                  "px-6 py-2 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-lg",
+                  "bg-accent text-black hover:bg-accent/90"
+                )}
+              >
+                Profile
+              </Link>
+              <button
+                onClick={logout}
+                className="text-xs font-bold text-primary/60 dark:text-white/60 hover:text-red-500 cursor-pointer"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className={cn(
+                "px-6 py-2 rounded-full font-bold transition-all hover:scale-105 active:scale-95 shadow-lg",
+                "bg-accent text-black hover:bg-accent/90"
+              )}
+            >
+              Login
+            </Link>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -113,13 +136,34 @@ const Navbar = () => {
             {link.name}
           </Link>
         ))}
-        <Link
-          href="/login"
-          className="px-10 py-4 bg-secondary text-primary rounded-full font-bold text-lg hover:scale-105 transition-transform"
-          onClick={() => setIsMobileMenuOpen(false)}
-        >
-          Book Now
-        </Link>
+        {isAuthenticated ? (
+          <>
+            <Link
+              href="/profile"
+              className="px-10 py-4 bg-secondary text-primary rounded-full font-bold text-lg hover:scale-105 transition-transform"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Profile
+            </Link>
+            <button
+              onClick={() => {
+                logout();
+                setIsMobileMenuOpen(false);
+              }}
+              className="text-red-500 font-bold text-lg cursor-pointer"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link
+            href="/login"
+            className="px-10 py-4 bg-secondary text-primary rounded-full font-bold text-lg hover:scale-105 transition-transform"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );

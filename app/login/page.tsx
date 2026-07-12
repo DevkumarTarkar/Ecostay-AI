@@ -1,147 +1,182 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Button, Input } from '@/components/ui';
-import { Leaf, Mail, Lock, User, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { useAuth } from "@/app/lib/auth";
+import { signIn, useSession } from "next-auth/react";
 
 export default function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true);
+  const { login, loading } = useAuth();
+  const { data: session } = useSession();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  // When NextAuth session arrives after OAuth, sync backend token to localStorage
+  useEffect(() => {
+    const backendToken = (session as any)?.backendToken;
+    const backendUser = (session as any)?.backendUser;
+    if (backendToken && backendUser) {
+      localStorage.setItem("ecostay_token", backendToken);
+      localStorage.setItem("ecostay_user", JSON.stringify(backendUser));
+      // Redirect to dashboard
+      window.location.href = "/dashboard";
+    }
+  }, [session]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!email || !password) {
+      setError("Please enter your email and password.");
+      return;
+    }
+
+    try {
+      await login(email, password);
+    } catch (err: any) {
+      setError(err.message || "Invalid email or password.");
+    }
+  };
+
+  const handleOAuthLogin = async (provider: "google" | "github") => {
+    try {
+      await signIn(provider, { callbackUrl: "/dashboard" });
+    } catch (err) {
+      setError(`Failed to start ${provider} login. Please try again.`);
+    }
+  };
 
   return (
-    <main className="min-h-screen bg-background transition-colors duration-500 pt-24 text-foreground flex flex-col">
-      <Navbar />
-      
-      <div className="flex-1 flex items-center justify-center p-6 bg-[url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-fixed">
-        <div className="absolute inset-0 bg-white/40 dark:bg-black/80 backdrop-blur-sm" />
+    <div className="min-h-screen flex items-center justify-center bg-background px-6 py-12">
+      <div className="w-full max-w-md bg-card border border-secondary/10 rounded-3xl p-8 shadow-luxury transition-all duration-300">
         
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative w-full max-w-md bg-card text-card-foreground rounded-[3rem] p-10 shadow-2xl border border-white/5 overflow-hidden"
-        >
-          {/* Decorative Gradient */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
+        {/* Logo and Headings */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-accent text-sm font-bold">
+              E
+            </span>
+            <span className="font-serif font-bold text-xl text-primary">
+              EcoStay <span className="text-accent">AI</span>
+            </span>
+          </div>
+          <h2 className="text-3xl font-serif font-bold text-primary mb-1">
+            Welcome Back
+          </h2>
+          <p className="text-muted text-sm italic">
+            Enter your credentials to access your dashboard
+          </p>
+        </div>
 
-          {/* Logo Section */}
-          <div className="text-center mb-10">
-            <div className="bg-accent dark:bg-primary w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <Leaf className="w-8 h-8 text-secondary" />
-            </div>
-            <h2 className="text-3xl font-serif font-bold text-primary dark:text-secondary italic">
-              {isLogin ? 'Welcome Back' : 'Join the Collective'}
-            </h2>
-            <p className="text-muted dark:text-foreground/60 text-sm mt-2 font-medium">
-              {isLogin ? 'Sign in to access your luxury sanctuaries.' : 'Start your journey towards sustainable luxury.'}
-            </p>
+        {/* Error Alert */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-2xl flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-600 shrink-0"></span>
+            <span>{error}</span>
+          </div>
+        )}
+
+        {/* Credentials Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-sm font-semibold text-primary mb-1.5">
+              Email Address
+            </label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@domain.com"
+              className="w-full px-4 py-3 bg-white/50 border border-secondary/20 rounded-2xl text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-200"
+            />
           </div>
 
-          <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
-            <AnimatePresence mode="wait">
-             {!isLogin && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mb-6"
-                >
-                  <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300 mb-2 block">Full Name</label>
-                  <div className="relative group">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-accent transition-colors" />
-                    <Input 
-                      placeholder="Alexander Luxury" 
-                      className="pl-12 h-14 bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 focus:border-accent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500" 
-                    />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div>
-              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300 mb-2 block">Email Address</label>
-              <div className="relative group">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-accent transition-colors" />
-                <Input 
-                  type="email"
-                  placeholder="name@ecostay.ai" 
-                  className="pl-12 h-14 bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 focus:border-accent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500" 
-                />
-              </div>
+          <div>
+            <div className="flex justify-between items-center mb-1.5">
+              <label className="block text-sm font-semibold text-primary">
+                Password
+              </label>
+              <a href="#" className="text-xs text-accent hover:underline">
+                Forgot password?
+              </a>
             </div>
-
-            <div>
-              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-300 mb-2 block">Password</label>
-              <div className="relative group">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-accent transition-colors" />
-                <Input 
-                  type="password"
-                  placeholder="••••••••" 
-                  className="pl-12 h-14 bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 focus:border-accent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500" 
-                />
-              </div>
-              {isLogin && (
-                <div className="text-right mt-2">
-                  <button className="text-xs font-black text-accent hover:underline transition-colors uppercase tracking-widest">Forgot Password?</button>
-                </div>
-              )}
-            </div>
-
-            <Button 
-              className="w-full h-14 rounded-full bg-accent text-white hover:opacity-90 shadow-lg shadow-accent/20 group text-lg font-bold"
-            >
-              <span className="flex items-center justify-center gap-2">
-                {isLogin ? 'Sign In' : 'Create Account'}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Button>
-          </form>
-
-          {/* Social Auth */}
-          <div className="mt-8">
-            <div className="relative flex items-center justify-center mb-6">
-              <div className="border-t border-secondary/20 w-full" />
-              <span className="bg-white dark:bg-slate-900 px-4 py-1 text-[10px] font-bold text-primary/40 dark:text-foreground/40 absolute uppercase tracking-widest">Or Continue With</span>
-            </div>
-            
-            <div className="flex gap-4">
-              <button className="flex-1 h-14 rounded-2xl border border-secondary/20 flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-white/5 transition-all group">
-                <svg className="w-6 h-6" viewBox="0 0 24 24">
-                  <path fill="#EA4335" d="M12 5.04c1.94 0 3.73.67 5.11 1.99l3.83-3.83C18.48 1.15 15.42 0 12 0 7.31 0 3.25 2.69 1.18 6.6l4.47 3.47C6.69 7.02 9.1 5.04 12 5.04z" />
-                  <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.47 4.47c2.03-1.87 3.22-4.62 3.22-8.02z" />
-                  <path fill="#FBBC05" d="M5.65 14.13c-.26-.79-.41-1.63-.41-2.5 0-.87.15-1.71.41-2.5L1.18 5.67C.43 7.59 0 9.75 0 12s.43 4.41 1.18 6.33l4.47-3.47z" />
-                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.07 7.94-2.91l-3.47-4.47c-1.11.75-2.54 1.2-4.47 1.2-3.87 0-7.13-2.61-8.31-6.13l-4.47 3.47C3.25 21.31 7.31 24 12 24z" />
-                </svg>
-                <span className="text-sm font-bold text-slate-700 dark:text-slate-200">Google</span>
-              </button>
-              <button className="flex-1 h-14 rounded-2xl border border-secondary/20 flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-white/5 transition-all group">
-                <svg className="w-6 h-6 text-slate-800 dark:text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                <span className="text-sm font-bold text-slate-700 dark:text-slate-200">GitHub</span>
-              </button>
-            </div>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="w-full px-4 py-3 bg-white/50 border border-secondary/20 rounded-2xl text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-200"
+            />
           </div>
 
-          {/* Toggle Switch */}
-          <div className="mt-10 text-center">
-            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-              {isLogin ? "Don't have a retreat account?" : "Already part of the collective?"}
-              <button 
-                onClick={() => setIsLogin(!isLogin)}
-                className="ml-2 text-accent font-bold hover:underline transition-all"
-              >
-                {isLogin ? 'Sign Up' : 'Sign In'}
-              </button>
-            </p>
-          </div>
-        </motion.div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3.5 bg-primary hover:bg-primary/90 text-white font-bold rounded-2xl shadow-luxury hover:shadow-luxury-hover transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+          >
+            {loading ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Signing In...
+              </>
+            ) : (
+              "Sign In"
+            )}
+          </button>
+        </form>
+
+        {/* Divider */}
+        <div className="relative my-8 text-center">
+          <hr className="border-secondary/10" />
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-card text-xs text-muted font-medium">
+            OR CONTINUE WITH
+          </span>
+        </div>
+
+        {/* OAuth Buttons */}
+        <div className="grid grid-cols-2 gap-4">
+          <button
+            onClick={() => handleOAuthLogin("google")}
+            className="py-3 bg-white hover:bg-slate-50 border border-secondary/20 hover:border-secondary/35 text-foreground font-semibold rounded-2xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-200 shadow-sm"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24">
+              <path
+                fill="#EA4335"
+                d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.5 5.5 0 0 1 8.5 13a5.5 5.5 0 0 1 5.491-5.518c1.396 0 2.67.572 3.6 1.5l3.117-3.116A9.93 9.93 0 0 0 13.99 3c-5.523 0-10 4.477-10 10s4.477 10 10 10c5.753 0 9.818-4.045 9.818-9.975 0-.677-.072-1.316-.24-1.74H12.24Z"
+              />
+            </svg>
+            Google
+          </button>
+
+          <button
+            onClick={() => handleOAuthLogin("github")}
+            className="py-3 bg-white hover:bg-slate-50 border border-secondary/20 hover:border-secondary/35 text-foreground font-semibold rounded-2xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-200 shadow-sm"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24">
+              <path
+                fill="#24292F"
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+              />
+            </svg>
+            GitHub
+          </button>
+        </div>
+
+        {/* Register link */}
+        <div className="mt-8 pt-6 border-t border-secondary/10 text-center text-sm">
+          <span className="text-muted">Don't have an account? </span>
+          <Link href="/register" className="text-accent font-semibold hover:underline">
+            Sign Up
+          </Link>
+        </div>
+
       </div>
-
-      <Footer />
-    </main>
+    </div>
   );
 }

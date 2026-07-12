@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Send, Bot, User, Compass, Hotel, Leaf } from 'lucide-react';
 import { Button, Input, Loader } from '@/components/ui';
+import { ProtectedRoute } from '@/app/lib/auth';
 
 const SAMPLE_PICKS = [
   { name: "Cloud 9 Valley Lodge", location: "Nainital", match: "98% Match", reason: "Sustainability Focus" },
@@ -13,7 +14,7 @@ const SAMPLE_PICKS = [
   { name: "EcoWhisper Retreat", location: "Munnar", match: "91% Match", reason: "Carbon Neutrality" }
 ];
 
-export default function AIPlannerPage() {
+function AIPlannerPage() {
   const [messages, setMessages] = useState<{ role: 'user' | 'ai'; content: string }[]>([
     { role: 'ai', content: "Namaste! I'm your AI Travel Concierge. Tell me about your dream escape — are you looking for mountains, beaches, or a heritage retreat?" }
   ]);
@@ -163,3 +164,12 @@ export default function AIPlannerPage() {
     </main>
   );
 }
+
+export default function ProtectedAIPlannerPage() {
+  return (
+    <ProtectedRoute>
+      <AIPlannerPage />
+    </ProtectedRoute>
+  );
+}
+
