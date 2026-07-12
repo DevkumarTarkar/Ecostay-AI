@@ -106,11 +106,9 @@ backend/uploads/*
 # Compiled PDF Reports (submit separately, not source code)
 /W5_CRUDVerification_TBI-26100184.pdf
 /W6_AuthFlowScreenshots_TBI-26100184.pdf
+/W5_SchemaDiagram_TBI-26100184.png
 
-# Unnecessary docs (personal notes / old submissions)
-docs/W5_CRUDVerification_TBI-26100184.pdf
-docs/W5_SchemaDiagram_TBI-26100184.png
-docs/EcoStay_AI_CRUD_Collection.json
-docs/reflection_video_script.md
-docs/test_api.sh
+# Unnecessary docs (personal notes / old submissions / not source code)
+/docs/
+/W6_AuthAPICollection_TBI-26100184.json
 
