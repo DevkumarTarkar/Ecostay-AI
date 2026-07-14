@@ -5,8 +5,10 @@ class Settings(BaseSettings):
     API_PORT: int = 8000
     JWT_SECRET: str = "supersecretkeyforecostayaiweek6developmentonly"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
+    GEMINI_API_KEY: str = ""
 
     model_config = SettingsConfigDict(env_file=".env")
+
 
 settings = Settings()
 

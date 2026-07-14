@@ -122,3 +122,23 @@ export async function deleteHomestay(id: number) {
     throw error;
   }
 }
+
+export async function fetchTravelPlan(data: { destination: string; days: number; budget: string; interests: string[] }) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/ai/travel-plan`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching travel plan from AI:', error);
+    throw error;
+  }
+}
+

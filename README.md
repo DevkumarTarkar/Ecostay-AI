@@ -24,10 +24,11 @@ The platform combines a modern **Next.js** frontend with a **FastAPI REST API** 
 - Featured Properties Section
 - Villas Discovery Page
 - Search Properties
-- AI Planner Interface
-- Dashboard UI
-- Dynamic Property Cards
-- Real-time Backend Integration
+- **AI Travel Planner & Concierge** (Structured Destination, Budget, Days & Interests inputs)
+- **JWT-secured Route Guards** (Redirects unauthorized users to /login)
+- **OAuth Login System** (Sign in with Google or GitHub)
+- Interactive Recommended Property Cards (Directly links to real database homestays)
+- Real-time Backend Integration & responsive loading state alerts
 
 ### ⚙️ Backend
 
@@ -36,11 +37,13 @@ The platform combines a modern **Next.js** frontend with a **FastAPI REST API** 
 - SQLAlchemy ORM
 - CRUD Operations
 - Search Endpoint
-- RESTful API Design
-- Pydantic Validation
-- Global Exception Handling
-- CORS Middleware
-- Swagger Documentation
+- **JWT Authentication** (Secure token-based user registration, login, and `/me` verification)
+- **OAuth Identity Synchronization** (Google & GitHub provider mappings)
+- **Google Gemini API Integration** (`gemini-1.5-flash` model for structured eco-itineraries)
+- **Fail-safe Fallback Mode** (Seamless offline travel plan generation on API timeout or key absence)
+- **API Rate Limiting** (Active slowapi throttling on login & register: 5 requests/min)
+- Pydantic Validation & Global Exception Handling
+- CORS Middleware & Swagger Documentation
 
 ---
 
@@ -48,14 +51,18 @@ The platform combines a modern **Next.js** frontend with a **FastAPI REST API** 
 
 | Category | Technologies |
 |----------|--------------|
-| Frontend | Next.js 14, React, TypeScript |
-| Styling | Tailwind CSS |
-| Backend | FastAPI |
-| Database | PostgreSQL |
+| Frontend | Next.js 14 (App Router), React, TypeScript |
+| Styling | Tailwind CSS, Framer Motion, Lucide Icons |
+| Backend | FastAPI (Python) |
+| Database | PostgreSQL (Hosted on Supabase) |
+| AI Integration | Google Gemini REST API (`gemini-1.5-flash`) |
+| Auth Protocol | NextAuth.js (Frontend) & JWT / OAuth 2.0 (Backend) |
+| Security | slowapi (Limiter), Passlib (Bcrypt), Python-Jose |
 | ORM | SQLAlchemy |
-| Validation | Pydantic |
+| Validation | Pydantic v2 |
 | API Testing | Postman |
 | Version Control | Git & GitHub |
+
 
 ---
 ---
@@ -131,17 +138,32 @@ Ecostay-AI
 
 # 🚀 REST API Endpoints
 
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/api/homestays/` | Get All Homestays |
-| GET | `/api/homestays/{id}` | Get Homestay By ID |
-| POST | `/api/homestays/` | Create Homestay |
-| PUT | `/api/homestays/{id}` | Update Homestay |
-| PATCH | `/api/homestays/{id}` | Partial Update |
-| DELETE | `/api/homestays/{id}` | Delete Homestay |
-| GET | `/api/homestays/search` | Search Homestays |
+### 🏡 Homestays (CRUD)
+| Method | Endpoint | Description | Access |
+|---------|----------|-------------|--------|
+| GET | `/api/homestays/` | Get All Homestays | Public |
+| GET | `/api/homestays/{id}` | Get Homestay By ID | Public |
+| POST | `/api/homestays/` | Create Homestay | Protected (Bearer JWT) |
+| PUT | `/api/homestays/{id}` | Update Homestay | Protected (Bearer JWT) |
+| PATCH | `/api/homestays/{id}` | Partial Update | Protected (Bearer JWT) |
+| DELETE | `/api/homestays/{id}` | Delete Homestay | Protected (Bearer JWT) |
+| GET | `/api/homestays/search` | Search Homestays | Public |
+
+### 🔐 Authentication & Session
+| Method | Endpoint | Description | Details |
+|---------|----------|-------------|---------|
+| POST | `/api/auth/register` | Register New User | Bcrypt encryption + slowapi Rate Limiting |
+| POST | `/api/auth/login` | Authenticate & Issue JWT | Returns Access Token + slowapi Rate Limiting |
+| GET | `/api/auth/me` | Fetch Current Session | Protected (Bearer JWT) |
+| POST | `/api/auth/oauth` | Sync OAuth Provider State | Syncs Google/GitHub account logins |
+
+### 🧠 Artificial Intelligence
+| Method | Endpoint | Description | Model |
+|---------|----------|-------------|-------|
+| POST | `/api/ai/travel-plan` | Generate Travel Itinerary | Google Gemini (`gemini-1.5-flash`) |
 
 ---
+
 
 ## Database Integration
 
@@ -216,15 +238,37 @@ http://localhost:8000/docs
 
 # 🔐 Environment Variables
 
-Create a `.env` file inside the **backend** folder.
-
+### ⚙️ Backend Environment Config (`backend/.env`)
+Create a `.env` file inside the `backend/` folder:
 ```env
-DATABASE_URL=your_database_url
+DATABASE_URL=postgresql://user:password@localhost:5432/ecostay_db
+API_PORT=8000
+JWT_SECRET=your_jwt_secret_key_here
+ACCESS_TOKEN_EXPIRE_MINUTES=10080
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
-Refer to `.env.example` for the required environment variables.
+### 🌐 Frontend Environment Config (`.env.local`)
+Create a `.env.local` file inside the root directory:
+```env
+# API Endpoint
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+
+# NextAuth Config
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret_here
+
+# Google OAuth API Keys
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+# GitHub OAuth API Keys
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+```
 
 ---
+
 ---
 
 # ⚙️ Set Up Database

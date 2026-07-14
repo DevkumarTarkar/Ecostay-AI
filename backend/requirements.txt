@@ -12,4 +12,9 @@ python-jose[cryptography]>=3.3.0
 slowapi>=0.1.9
 email-validator>=2.1.0
 
+# Dev dependencies (for automated screenshot captures & PDF generation)
+reportlab==4.0.9
+playwright==1.41.2
+
+
 

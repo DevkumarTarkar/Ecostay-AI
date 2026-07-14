@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from .routes import homestay_routes, auth_routes
+from .routes import homestay_routes, auth_routes, ai_routes
 from .middleware.exception_handler import exception_handler
 from .database import engine, Base
 from .routes.auth_routes import limiter
@@ -41,6 +41,8 @@ app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
 # Register Routes
 app.include_router(homestay_routes.router, prefix="/api")
 app.include_router(auth_routes.router)
+app.include_router(ai_routes.router, prefix="/api")
+
 
 # Centralized Exception Handling
 @app.exception_handler(Exception)
