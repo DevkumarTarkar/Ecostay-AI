@@ -7,6 +7,25 @@
 
 ---
 
+## 🚀 Deployment & Live Application
+
+- **Live Frontend URL**: [https://ecostay-ai-gilt.vercel.app](https://ecostay-ai-gilt.vercel.app)
+- **Live Backend URL**: [https://ecostay-ai.onrender.com](https://ecostay-ai.onrender.com)
+- **API Health Check**: [https://ecostay-ai.onrender.com/api/health](https://ecostay-ai.onrender.com/api/health)
+
+### 🛠️ Tech Stack Summary
+- **Frontend**: Next.js 16 (App Router), React, TypeScript, Tailwind CSS, Framer Motion
+- **Backend**: FastAPI (Python 3.11), SQLAlchemy ORM, Pydantic v2
+- **Database**: PostgreSQL (Supabase / SQLite Fallback)
+- **AI Integration**: Google Gemini API (`gemini-1.5-flash`)
+- **Hosting / Deployment**: Vercel (Frontend) & Render (Backend)
+
+### ⚠️ Known Limitations on Free Tier
+- **Render Cold Starts**: The backend is hosted on Render's free tier, which spins down after 15 minutes of inactivity. The first request after idle can take **30–60 seconds** to wake up the instance.
+- **Supabase / DB Connection**: On cold start, database pooling may experience a minor latency delay on initial request.
+
+---
+
 ## 📖 About The Project
 
 EcoStay AI is a full-stack web application developed to simplify the discovery of eco-friendly villas and homestays across India.

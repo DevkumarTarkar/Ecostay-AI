@@ -113,6 +113,9 @@ backend/uploads/*
 /W8_FrontendCompletion_TBI-26100184.pdf
 /W8_Deliverables_TBI-26100184.zip
 /w8_screenshots/
+/W9_DeploymentProof_TBI-26100184.pdf
+/W9_Deliverables_TBI-26100184.zip
+/w9_screenshots/
 
 # Unnecessary docs (personal notes / old submissions / not source code)
 /docs/
