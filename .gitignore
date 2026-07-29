@@ -123,3 +123,6 @@ backend/uploads/*
 /3_ai_final_output.png
 
 
+
+.vercel
+.env*
