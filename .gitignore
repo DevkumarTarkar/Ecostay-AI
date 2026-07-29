@@ -103,15 +103,16 @@ backend/uploads/*
 /7_oauth_loggedin.png
 /8_rate_limiting.png
 
-# Compiled PDF Reports (submit separately, not source code)
+# Compiled PDF Reports & Deliverables (submit separately, not source code)
 /W5_CRUDVerification_TBI-26100184.pdf
 /W6_AuthFlowScreenshots_TBI-26100184.pdf
 /W7_AIFeatureDemo_TBI-26100184.pdf
 /W7_ProgressReport_TBI-26100184.pdf
 /W7_Deliverables_TBI-26100184.zip
 /W5_SchemaDiagram_TBI-26100184.png
-
-
+/W8_FrontendCompletion_TBI-26100184.pdf
+/W8_Deliverables_TBI-26100184.zip
+/w8_screenshots/
 
 # Unnecessary docs (personal notes / old submissions / not source code)
 /docs/
