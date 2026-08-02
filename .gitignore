@@ -116,6 +116,9 @@ backend/uploads/*
 /W9_DeploymentProof_TBI-26100184.pdf
 /W9_Deliverables_TBI-26100184.zip
 /w9_screenshots/
+/manual_ss/
+/w9_real_screenshots/
+/w9_processed_screenshots/
 
 # Unnecessary docs (personal notes / old submissions / not source code)
 /docs/
