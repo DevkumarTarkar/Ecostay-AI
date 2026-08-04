@@ -11,7 +11,8 @@
 
 - **Live Frontend URL**: [https://ecostay-ai-gilt.vercel.app](https://ecostay-ai-gilt.vercel.app)
 - **Live Backend URL**: [https://ecostay-ai.onrender.com](https://ecostay-ai.onrender.com)
-- **API Health Check**: [https://ecostay-ai.onrender.com/api/health](https://ecostay-ai.onrender.com/api/health)
+- **GitHub Repository**: [https://github.com/DevkumarTarkar/Ecostay-AI](https://github.com/DevkumarTarkar/Ecostay-AI)
+- **Demo Video (YouTube Unlisted)**: [📺 Watch Capstone Demo Video](YOUR_YOUTUBE_UNLISTED_LINK_HERE)
 
 ### 🛠️ Tech Stack Summary
 - **Frontend**: Next.js 16 (App Router), React, TypeScript, Tailwind CSS, Framer Motion
@@ -19,6 +20,19 @@
 - **Database**: PostgreSQL (Supabase / SQLite Fallback)
 - **AI Integration**: Google Gemini API (`gemini-1.5-flash`)
 - **Hosting / Deployment**: Vercel (Frontend) & Render (Backend)
+
+---
+
+## 🖼️ Application Screenshots
+
+<p align="center">
+  <img src="screenshots/3_live_homepage.png" alt="EcoStay AI Live Homepage" width="48%" />
+  <img src="screenshots/4_live_ai_planner.png" alt="AI Travel Concierge" width="48%" />
+</p>
+<p align="center">
+  <img src="screenshots/1_vercel_dashboard.png" alt="Vercel Deployment Dashboard" width="48%" />
+  <img src="screenshots/2_render_dashboard.png" alt="Render Backend Dashboard" width="48%" />
+</p>
 
 ### ⚠️ Known Limitations on Free Tier
 - **Render Cold Starts**: The backend is hosted on Render's free tier, which spins down after 15 minutes of inactivity. The first request after idle can take **30–60 seconds** to wake up the instance.
