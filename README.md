@@ -1,25 +1,18 @@
 # 🌿 EcoStay AI
 
-<p align="center">
-  <b>AI-Powered Eco Tourism & Homestay Booking Platform</b><br>
-  Discover sustainable stays across India with a modern full-stack web application.
-</p>
+> An AI-Powered Eco-Tourism & Sustainable Homestay Booking Platform connecting eco-conscious travelers with verified green stays and personalized low-impact travel itineraries.
 
 ---
 
-## 🚀 Deployment & Live Application
-
-- **Live Frontend URL**: [https://ecostay-ai-gilt.vercel.app](https://ecostay-ai-gilt.vercel.app)
-- **Live Backend URL**: [https://ecostay-ai.onrender.com](https://ecostay-ai.onrender.com)
+## 🔗 Live Demo
+- **Live Application (Vercel)**: [https://ecostay-ai-gilt.vercel.app](https://ecostay-ai-gilt.vercel.app)
+- **Live Backend REST API (Render)**: [https://ecostay-ai.onrender.com](https://ecostay-ai.onrender.com)
 - **GitHub Repository**: [https://github.com/DevkumarTarkar/Ecostay-AI](https://github.com/DevkumarTarkar/Ecostay-AI)
-- **Demo Video (YouTube Unlisted)**: [📺 Watch Capstone Demo Video](YOUR_YOUTUBE_UNLISTED_LINK_HERE)
 
-### 🛠️ Tech Stack Summary
-- **Frontend**: Next.js 16 (App Router), React, TypeScript, Tailwind CSS, Framer Motion
-- **Backend**: FastAPI (Python 3.11), SQLAlchemy ORM, Pydantic v2
-- **Database**: PostgreSQL (Supabase / SQLite Fallback)
-- **AI Integration**: Google Gemini API (`gemini-1.5-flash`)
-- **Hosting / Deployment**: Vercel (Frontend) & Render (Backend)
+---
+
+## 📺 Demo Video
+- **YouTube (Unlisted)**: [Watch Capstone Demo Video](YOUR_YOUTUBE_UNLISTED_LINK_HERE)
 
 ---
 
@@ -34,364 +27,164 @@
   <img src="screenshots/2_render_dashboard.png" alt="Render Backend Dashboard" width="48%" />
 </p>
 
-### ⚠️ Known Limitations on Free Tier
-- **Render Cold Starts**: The backend is hosted on Render's free tier, which spins down after 15 minutes of inactivity. The first request after idle can take **30–60 seconds** to wake up the instance.
-- **Supabase / DB Connection**: On cold start, database pooling may experience a minor latency delay on initial request.
-
----
-
-## 📖 About The Project
-
-EcoStay AI is a full-stack web application developed to simplify the discovery of eco-friendly villas and homestays across India.
-
-The platform combines a modern **Next.js** frontend with a **FastAPI REST API** backend and **PostgreSQL** database. Users can browse properties, search destinations, and interact with dynamic data fetched directly from the backend.
-
 ---
 
 ## ✨ Features
 
-### 🌐 Frontend
-
-- Modern Responsive UI
-- Light & Dark Mode
-- Featured Properties Section
-- Villas Discovery Page
-- Search Properties
-- **AI Travel Planner & Concierge** (Structured Destination, Budget, Days & Interests inputs)
-- **JWT-secured Route Guards** (Redirects unauthorized users to /login)
-- **OAuth Login System** (Sign in with Google or GitHub)
-- Interactive Recommended Property Cards (Directly links to real database homestays)
-- Real-time Backend Integration & responsive loading state alerts
-
-### ⚙️ Backend
-
-- FastAPI REST API
-- PostgreSQL Database
-- SQLAlchemy ORM
-- CRUD Operations
-- Search Endpoint
-- **JWT Authentication** (Secure token-based user registration, login, and `/me` verification)
-- **OAuth Identity Synchronization** (Google & GitHub provider mappings)
-- **Google Gemini API Integration** (`gemini-1.5-flash` model for structured eco-itineraries)
-- **Fail-safe Fallback Mode** (Seamless offline travel plan generation on API timeout or key absence)
-- **API Rate Limiting** (Active slowapi throttling on login & register: 5 requests/min)
-- Pydantic Validation & Global Exception Handling
-- CORS Middleware & Swagger Documentation
+- **Eco-Stay Discovery**: Browse verified sustainable villas and homestays across India with real-time property details.
+- **AI Travel Concierge**: Generate personalized, carbon-conscious travel itineraries based on destination, duration, budget, and travel preferences using Google Gemini AI.
+- **Full CRUD Persistence**: Add, read, update, and delete homestays persisted directly in PostgreSQL / SQLite database.
+- **JWT & OAuth Authentication**: Secure registration and login using JWT tokens with route protection guards, plus OAuth 2.0 (Google & GitHub).
+- **API Rate Limiting**: Slowapi rate limiter protecting sensitive authentication endpoints (5 requests/minute).
+- **Responsive UI**: Sleek, modern glassmorphism design with mobile-first responsive layout (optimized down to 375px).
 
 ---
 
-# 🛠 Tech Stack
+## 🛠️ Tech Stack
 
 | Category | Technologies |
 |----------|--------------|
-| Frontend | Next.js 14 (App Router), React, TypeScript |
-| Styling | Tailwind CSS, Framer Motion, Lucide Icons |
-| Backend | FastAPI (Python) |
-| Database | PostgreSQL (Hosted on Supabase) |
-| AI Integration | Google Gemini REST API (`gemini-1.5-flash`) |
-| Auth Protocol | NextAuth.js (Frontend) & JWT / OAuth 2.0 (Backend) |
-| Security | slowapi (Limiter), Passlib (Bcrypt), Python-Jose |
-| ORM | SQLAlchemy |
-| Validation | Pydantic v2 |
-| API Testing | Postman |
-| Version Control | Git & GitHub |
-
-
----
----
-
-# 🗄️ Database
-
-## Database Choice
-
-This project uses **PostgreSQL** hosted on **Supabase** as the primary relational database.
-
-## Why PostgreSQL?
-
-- Reliable relational database
-- ACID-compliant transactions
-- High performance
-- Easy integration with SQLAlchemy
-- Cloud-hosted using Supabase
-- Scalable for production applications
+| **Frontend** | Next.js 16 (App Router), React, TypeScript, Tailwind CSS, Framer Motion, Lucide Icons |
+| **Backend** | FastAPI (Python 3.11), SQLAlchemy ORM, Pydantic v2, slowapi |
+| **Database** | PostgreSQL (Hosted on Supabase) with local SQLite fallback |
+| **AI Integration** | Google Gemini REST API (`gemini-1.5-flash`) |
+| **Auth Protocol** | NextAuth.js (Frontend) & JWT / OAuth 2.0 (Backend) |
+| **Hosting & Deployment** | Vercel (Frontend) & Render (Backend) |
 
 ---
 
-# 📂 Project Structure
+## 🚀 Setup Instructions
 
-```text
-Ecostay-AI
-│
-├── app/
-│   ├── about/
-│   ├── dashboard/
-│   ├── login/
-│   ├── villas/
-│   └── page.tsx
-│
-├── backend/
-│   ├── app/
-│   │
-│   ├── middleware/
-│   │   └── exception_handler.py
-│   │
-│   ├── models/
-│   │   └── homestay.py
-│   │
-│   ├── routes/
-│   │   └── homestay_routes.py
-│   │
-│   ├── schemas/
-│   │   ├── homestay.py
-│   │   └── response.py
-│   │
-│   ├── services/
-│   │   └── homestay_service.py
-│   │
-│   ├── utils/
-│   │
-│   ├── config.py
-│   ├── database.py
-│   ├── main.py
-│   │
-│   ├── .env.example
-│   ├── .gitignore
-│   └── requirements.txt
-│
-├── components/
-├── docs/
-├── public/
-├── README.md
-├── package.json
-├── next.config.ts
-└── tsconfig.json
-```
+Follow these steps to clone and run EcoStay AI locally on your machine.
 
----
+### Prerequisites
+- Node.js v18+ and `npm`
+- Python v3.10+
+- Git
 
-# 🚀 REST API Endpoints
-
-### 🏡 Homestays (CRUD)
-| Method | Endpoint | Description | Access |
-|---------|----------|-------------|--------|
-| GET | `/api/homestays/` | Get All Homestays | Public |
-| GET | `/api/homestays/{id}` | Get Homestay By ID | Public |
-| POST | `/api/homestays/` | Create Homestay | Protected (Bearer JWT) |
-| PUT | `/api/homestays/{id}` | Update Homestay | Protected (Bearer JWT) |
-| PATCH | `/api/homestays/{id}` | Partial Update | Protected (Bearer JWT) |
-| DELETE | `/api/homestays/{id}` | Delete Homestay | Protected (Bearer JWT) |
-| GET | `/api/homestays/search` | Search Homestays | Public |
-
-### 🔐 Authentication & Session
-| Method | Endpoint | Description | Details |
-|---------|----------|-------------|---------|
-| POST | `/api/auth/register` | Register New User | Bcrypt encryption + slowapi Rate Limiting |
-| POST | `/api/auth/login` | Authenticate & Issue JWT | Returns Access Token + slowapi Rate Limiting |
-| GET | `/api/auth/me` | Fetch Current Session | Protected (Bearer JWT) |
-| POST | `/api/auth/oauth` | Sync OAuth Provider State | Syncs Google/GitHub account logins |
-
-### 🧠 Artificial Intelligence
-| Method | Endpoint | Description | Model |
-|---------|----------|-------------|-------|
-| POST | `/api/ai/travel-plan` | Generate Travel Itinerary | Google Gemini (`gemini-1.5-flash`) |
-
----
-
-
-## Database Integration
-
-All API endpoints perform CRUD operations directly on the PostgreSQL database using SQLAlchemy ORM.
-
-Implemented Endpoints:
-
-- ✅ Get All Homestays
-- ✅ Get Homestay by ID
-- ✅ Create Homestay
-- ✅ Update Homestay
-- ✅ Partial Update
-- ✅ Delete Homestay
-- ✅ Search Homestays
-
----
-# 🚀 Getting Started
-
-## 1️⃣ Clone Repository
-
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/DevkumarTarkar/Ecostay-AI.git
-
 cd Ecostay-AI
 ```
 
----
-
-## 2️⃣ Frontend Setup
-
-```bash
-npm install
-
-npm run dev
-```
-
-Frontend runs at
-
-```
-http://localhost:3000
-```
-
----
-
-## 3️⃣ How to run backend locally
-
+### 2. Backend Setup
 ```bash
 cd backend
-
-python -m venv venv
-
-venv\Scripts\activate
+python -m venv .venv
+# On Windows PowerShell:
+.\.venv\Scripts\Activate.ps1
+# On Linux/macOS:
+source .venv/bin/activate
 
 pip install -r requirements.txt
-
-python -m uvicorn app.main:app --reload
 ```
 
-Backend runs at
-
-```
-http://localhost:8000
-```
-
-Swagger Documentation
-
-```
-http://localhost:8000/docs
-```
-
----
-
-# 🔐 Environment Variables
-
-### ⚙️ Backend Environment Config (`backend/.env`)
-Create a `.env` file inside the `backend/` folder:
+Create `.env` inside `backend/`:
 ```env
-DATABASE_URL=postgresql://user:password@localhost:5432/ecostay_db
-API_PORT=8000
-JWT_SECRET=your_jwt_secret_key_here
-ACCESS_TOKEN_EXPIRE_MINUTES=10080
-GEMINI_API_KEY=your_gemini_api_key_here
+DATABASE_URL=sqlite:///./test.db
+SECRET_KEY=your_secret_key_here
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-### 🌐 Frontend Environment Config (`.env.local`)
-Create a `.env.local` file inside the root directory:
+Run Backend Server:
+```bash
+uvicorn app.main:app --reload --port 8000
+```
+Backend API will run at `http://localhost:8000`.
+
+### 3. Frontend Setup
+From repo root:
+```bash
+npm install
+```
+
+Create `.env.local` in project root:
 ```env
-# API Endpoint
 NEXT_PUBLIC_API_URL=http://localhost:8000/api
-
-# NextAuth Config
 NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your_nextauth_secret_here
-
-# Google OAuth API Keys
+NEXTAUTH_SECRET=your_nextauth_secret
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-# GitHub OAuth API Keys
 GITHUB_CLIENT_ID=your_github_client_id
 GITHUB_CLIENT_SECRET=your_github_client_secret
 ```
 
----
-
----
-
-# ⚙️ Set Up Database
-
-1. Create a PostgreSQL database (Supabase or local PostgreSQL).
-
-2. Create a `.env` file inside the `backend` folder.
-
-```env
-DATABASE_URL=your_database_url
-API_PORT=8000
-```
-
-3. Install dependencies
-
+Run Frontend Development Server:
 ```bash
-pip install -r requirements.txt
+npm run dev
+```
+Open `http://localhost:3000` in your browser.
+
+---
+
+## 📑 API Documentation
+
+Below is a summary of core backend REST endpoints:
+
+### Authentication
+- `POST /api/auth/register` — Register a new user account.
+- `POST /api/auth/login` — Authenticate and receive JWT access token.
+- `GET /api/auth/me` — Retrieve current authenticated user profile.
+
+### Homestays (CRUD)
+- `GET /api/homestays/` — List all eco homestays (with search & filter options).
+- `GET /api/homestays/{id}` — Get detailed information for a specific stay.
+- `POST /api/homestays/` — Create a new eco homestay listing (Authenticated).
+- `PUT /api/homestays/{id}` — Update property details (Authenticated).
+- `DELETE /api/homestays/{id}` — Delete property listing (Authenticated).
+
+### AI Travel Planner
+- `POST /api/ai/travel-plan` — Generate custom eco-itinerary via Google Gemini API.
+
+#### Request Example:
+```json
+{
+  "destination": "Manali",
+  "days": 3,
+  "budget": 15000,
+  "interests": ["Nature & Ecology", "Organic Dining"]
+}
 ```
 
-4. Start the backend
+---
 
-```bash
-uvicorn app.main:app --reload
+## 🏗️ Architecture & Folder Structure
+
+```text
+Ecostay-AI/
+├── app/                  # Next.js App Router (Frontend pages & components)
+│   ├── about/            # About page
+│   ├── ai-planner/       # AI Travel Concierge page
+│   ├── dashboard/        # Authenticated user dashboard
+│   ├── login/            # Login & Register pages
+│   ├── villas/           # Homestays discovery & detail pages
+│   └── page.tsx          # Homepage
+├── backend/              # FastAPI Backend Application
+│   └── app/
+│       ├── database.py   # SQLAlchemy engine & session setup
+│       ├── main.py       # FastAPI application entrypoint & CORS
+│       ├── models/       # Database ORM models (User, Homestay)
+│       ├── routes/       # API Route controllers (auth, homestays, ai)
+│       └── services/     # Business logic & Gemini AI integration
+├── screenshots/          # Embedded README screenshot assets
+├── vercel.json           # Vercel deployment configuration
+└── README.md             # Production documentation
 ```
 
-The API will be available at:
-
-```
-http://localhost:8000
-```
-
 ---
-# 🗂️ Database Schema
 
-The database schema used in this project is shown below.
+## ⚠️ Known Limitations
 
-![Database Schema](docs/schema-diagram.png)
+- **Render Free Tier Cold Starts**: The backend is hosted on Render's free tier, which sleeps after 15 minutes of inactivity. Initial request after idle takes **30–60 seconds** to wake up.
+- **Database Pooling**: Supabase connection pooling may exhibit slight initial latency during instance spin-up.
+- **Offline Fallback Mode**: If the Gemini API key is missing or encounters a network timeout, the system seamlessly returns a pre-structured eco-itinerary fallback.
 
 ---
 
-# 📸 Project Screenshots
+## 💖 Credits & Acknowledgements
 
-### 🏠 Home Page
-
-> Add Home Page Screenshot Here
-
----
-
-### 🏡 Villas Page
-
-> Add Villas Page Screenshot Here
-
----
-
-### 📑 Swagger API
-
-> Add Swagger Screenshot Here
-
----
-
-### 🌐 Frontend Connected to Backend
-
-> Add Network Tab Screenshot Here
-
----
-
-# 👨‍💻 Developer
-
-### Dev Kumar Tarkar
-
-**B.Tech CSE (Artificial Intelligence & Machine Learning)**
-
-GLA University, Mathura
-
-GitHub
-
-https://github.com/DevkumarTarkar
-
-LinkedIn
-
-https://www.linkedin.com/in/dev-kumar-tarkar-55189731a/
-
----
-
-# ⭐ Support
-
-If you like this project, don't forget to **Star ⭐ the repository.**
-
----
-
-<p align="center">
-Made with ❤️ using Next.js, FastAPI & PostgreSQL
-</p>
+- **TBI-GEU Internship Program**: For guidance and capstone project framework.
+- **Google Gemini API**: For powering the AI Eco-Travel Concierge.
+- **Next.js & FastAPI Teams**: For robust developer frameworks.
+- **Open Source Community**: Lucide Icons, Framer Motion, Tailwind CSS, and ReportLab.
