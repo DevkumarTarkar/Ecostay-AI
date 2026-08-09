@@ -12,7 +12,7 @@
 ---
 
 ## 📺 Demo Video
-- **YouTube (Unlisted)**: [Watch Capstone Demo Video](YOUR_YOUTUBE_UNLISTED_LINK_HERE)
+- **YouTube (Unlisted)**: [Watch Capstone Demo Video](https://www.youtube.com/watch?v=WYiiMB4REFQ)
 
 ---
 
